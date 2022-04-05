@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //延迟调用
+    //延时调用一个函数不马上执行，而是隔一段时间以后再执行，而且只会执行一次
+    //延时调用和定时调用的区别：
+        //延时调用只执行一次，定时调用每隔一段时间就执行一次
+    var timer = setTimeout(function(){
+        console.log("Hello world");
+    },3000) 
+
+    //如果相关闭延时调用使用clearTimeout()
+    clearTimeout(timer);
+</script>
+</html>

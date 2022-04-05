@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文本的样式</title>
+    <style>
+        
+        div{
+            width: 800px;
+            border: 1px red solid;
+            /* 
+                text-align 文本的水平对齐
+                    可选值：
+                        left 左侧对齐
+                        right 右对齐
+                        center 居中对齐
+                        justify 两端对齐
+            */
+            /* text-align: justify; */
+            font-size: 50px;
+        }
+
+        span{
+            font-size: 20px;
+            border: 1px blue solid;
+
+            /* 
+                vertical-align 设置元素谁知对齐的方式
+                    可选值
+                        baseline默认值 基线对齐
+                        top 顶部对齐
+                        bottom 底部对齐
+                        middle 居中对齐
+            */
+            vertical-align: baseline;
+        }
+
+        p{
+            border: 1px red solid;
+        }
+
+        /* 默认图片和边框之间还存留一点缝隙 */
+        img{
+            /* 只要不沿着基线对齐就可以处理掉存留的缝隙 */
+            vertical-align: top;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div>今天天气真不错，我好想出去玩<span>Hello World!</span>！！！</div>
+    <!-- <div>aosihaweng;iodjvoiadjaonfakldhfulidshiuashfjanfkjldshfkasdhuhasdfhaiuhfiauweyuihsdiasdvjkhajkhviadhfuahewiryaewihfiuadhvahsdvkj</div> -->
+    <p><img src="../练习/img/7-140126204053.jpg" alt=""></p>
+
+</body>
+</html>

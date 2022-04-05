@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /* 
+            Date对象
+                -在js中使用date对象表示一个时间
+        */
+       //创建一个Date对象
+       //如果直接使用构造函数创建一个Date对象，则会封装为当前代码执行时间
+        var d = new Date();
+        console.log(d);
+
+        //创建一个指定的时间对象
+        //需要在构造函数中传递一个表示时间的字符串作为参数
+        //日期的格式 月份/日/年 时:分:秒
+        var d2 = new Date("12/03/2020 11:10:30");
+        console.log(d2);
+
+        //获取当前日期一周中第几天
+        var day = d2.getDate();
+        //获取星期几
+        //0周日 1周一 2周二 。。。
+        day = d2.getDay();
+
+        //获取当前月份 
+        //0一月 1二月 2三月 11就是12月
+        var month = d2.getMonth();
+
+        //获取当前的时间戳
+        var t = Date.now(); 
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

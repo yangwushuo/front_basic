@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伪元素选择器</title>
+    <style>
+        p{
+            font-size: 20px;
+        }
+
+        /* 
+            伪元素，表示页面中一些特殊的并不真实存在的元素（特殊的位置）
+                伪元素使用::开头
+
+                ::first-letter 表示第一个字母
+                ::first-line 表示第一行
+                ::selection 表示选中的内容
+                ::before 元素的开始
+                ::after 元素的最后
+                    - before 和 after 必须结合content属性来使用
+        */
+        /* 第一个字符 */
+        p::first-letter{
+            font-size: 50px;
+        }
+
+        /* 第一行 */
+        p::first-line{
+            background-color: yellow;
+        }
+
+        /* 被选中的内容显示效果 */
+        p::selection{
+            background-color: greenyellow;
+        }
+
+        /* div::before{
+            content: 'abc';
+            color: red;
+        }
+
+        div::after{
+            content: 'haha';
+            color: blue;
+        } */
+
+        /* 在句子之前添加特殊符号 */
+        div.box::before{
+            content: '----';
+        }
+
+        /* 在句子之后添加特殊符号 */
+        div.box::after{
+            content: '-----';
+        }
+    </style>
+</head>
+<body>
+    <div class="box">Hello Hello How are you</div>
+    <p>
+        我是大帅哥我 是大帅哥我是大帅哥我 是大帅哥我是 大帅哥我是大帅哥我是大帅哥
+    </p>
+</body>
+</html>

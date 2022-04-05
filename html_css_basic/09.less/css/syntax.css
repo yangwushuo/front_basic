@@ -1,0 +1,28 @@
+.box1 {
+  background-color: red;
+}
+.box1 .box2 {
+  background-color: #ffa;
+}
+.box1 .box2 .box3 {
+  color: red;
+}
+.box1 .box4 {
+  background-color: orange;
+}
+.box5 {
+  width: 1000px;
+  color: #bfa;
+}
+.box6 {
+  width: 1000px;
+  background-image: url("img/1.png");
+}
+div {
+  width: 115px;
+  height: 335px;
+}
+div {
+  width: 300px;
+  height: 300px;
+}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网易新闻的右侧</title>
+    <link rel="stylesheet" href="css/replay.css">
+    <style>
+
+        body{
+            background-color: #bfa;
+        }
+
+        a{
+            /* 去除下滑线    */
+            text-decoration: none;
+        }
+
+        /* 设置容器的样式 */
+        .news-wrapper{
+            /* 设置宽度 */
+            width: 300px;
+            /* 设置高度 */
+            height: 357px;
+            /* 居中 */
+            margin: 40px auto;
+            /* 设置背景颜色 显示轮廓 */
+            background-color: #fff;
+            /* 设置上边框 */
+            border-top: 1px solid #ddd;
+        }
+
+        /* 设置news-title */
+        .news-title{
+            /* 为了边框和文字宽度一致，需要将h2转换为行内元素 */
+            display: inline-block;
+            /* 设置高度 */
+            height: 30px;
+            /* 设置上边框 */
+            border-top: 1px red solid;
+            /* 通过margin-top将h2上移，盖住上边框 */
+            margin-top: -1px;
+            /* 设置内边距 */
+            padding-top: 10px;
+        }
+
+        .news-img img{
+            width: 100%;
+        }
+
+        /* 设置title中的超链接样式 */
+        .news-title a{
+            /* 去除下划线 */
+            text-decoration: none;
+            /* 设置颜色 */
+            color: #40406B;
+            /* 设置文字的加粗效果 */
+            font-weight: bold;
+        }
+
+        .news-img{
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 设置图片的文字效果*/
+        .news-img .img-title{
+            /* 向上移动文字 */
+            margin-top: -40px;
+            /* 设置字体颜色 */
+            color: black;
+            /* 设置加粗 */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 创建新闻列表的外侧的容器 -->
+    <div class="news-wrapper">
+        <!-- 创建一个标题标签 -->
+        <h2 class="news-title">
+            <a href="">体育</a>
+        </h2>
+
+        <!-- 创建一个图片的容器 -->
+        <div class="news-img">
+            <a href="">
+                <img src="img/7-140126204109.jpg" alt="logo">
+                <!-- 创建图片标题 -->
+                <h2 class="img-title">
+                    我就个good boy
+                </h2>
+            </a>
+        </div>
+
+        <!-- 新闻列表 -->
+        <ul class="news-list">
+            <li>
+                <a href="">jason:我是个大帅哥</a>
+            </li>
+            <li>
+                <a href="">我是超级大帅哥</a>
+            </li>
+            <li>
+                <a href="">我是宇宙无敌大帅哥</a>
+            </li>
+            <li>
+                <a href="">没人比我更帅哥</a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="../img/logo1.jpg" alt="logo" id="img1">
+</body>
+<script>
+    /* 
+        使图片可以自动切换
+    */
+   //获取img标签
+   var img1 = document.getElementById("img1");
+   //创建一个数组来保存图片的路径
+   var imgArr = ["logo1.jpg","logo2.jpg","logo3.jpg"];
+   var imgPath = "../img/";
+   var index = 0;
+   setInterval(function () {
+        ++index;  
+        img1.src = imgPath + imgArr[index];
+        if(index+1 == imgArr.length){
+            index = 0;
+        }
+   },1000)
+</script>
+</html>

@@ -1,0 +1,51 @@
+{
+  "id": "3230631",
+  "name": "lian'xi",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "27804437",
+      "name": "报表",
+      "font_class": "baobiao",
+      "unicode": "100a4",
+      "unicode_decimal": 65700
+    },
+    {
+      "icon_id": "27804438",
+      "name": "证件",
+      "font_class": "zhengjian",
+      "unicode": "100a5",
+      "unicode_decimal": 65701
+    },
+    {
+      "icon_id": "27804439",
+      "name": "话题",
+      "font_class": "huati",
+      "unicode": "100a6",
+      "unicode_decimal": 65702
+    },
+    {
+      "icon_id": "27804440",
+      "name": "银行卡",
+      "font_class": "yinhangka",
+      "unicode": "100a7",
+      "unicode_decimal": 65703
+    },
+    {
+      "icon_id": "27804441",
+      "name": "购物",
+      "font_class": "gouwu",
+      "unicode": "100a8",
+      "unicode_decimal": 65704
+    },
+    {
+      "icon_id": "27804442",
+      "name": "预读",
+      "font_class": "yudu",
+      "unicode": "100a9",
+      "unicode_decimal": 65705
+    }
+  ]
+}

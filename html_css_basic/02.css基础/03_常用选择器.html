@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-widtph, initial-scale=1.0">
+    <title>常用选择器</title>
+    <style>
+        /* 
+            元素选择器
+                作用：根据标签名来选中指定的元素
+                语法：标签名{}
+                例子：p{} h1{} div{}
+        */
+        p{
+            color: red;
+        }
+
+        /* 
+            id选择器
+                作用：根据元素的id属性值选中一个元素
+                语法：#id属性值{}
+                例子：#box{} #red{}
+                注意：id最好定位到单一一个元素，而class可以定位一类元素
+        */
+        #a{
+            color: green;
+        }
+
+        /*
+            类选择器
+                作用：根据元素的class属性值选中一组元素
+                语法：.class属性值
+                例子：.g{}
+        */
+        .z{
+            color: blueviolet;
+            font-size: 100px;
+        }
+
+        .t1{
+            color: red;
+        }
+
+        .t2{
+            font-size: 100px;
+        }
+
+        /* 
+            通配选择器
+                作用：选中页面中的所有元素，直接一个星号#
+        */
+        /* #{
+
+        } */
+    </style>
+</head>
+<body>
+    <!-- class可以指定多个名字 -->
+    <h1 class="t1 t2">这是标题</h1>
+    <!-- id -->
+    <p id="a">AAAAAA</p>
+    <p id="b">BBBBBB</p>
+    <!--
+        class 它和id类似，不同的时class可以重复使用
+            可以通过class属性来为元素分组
+     -->
+    <p class="z">CCCCCC</p>
+    <p class="z">DDDDDD</p>    
+</body>
+</html>

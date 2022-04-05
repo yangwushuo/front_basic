@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // concat()
+			// 不会对原数组产生影响
+			var arrb = ["testc","testd"];
+			console.log(arra.concat(arrb));
+			
+			// join()
+			// 默认逗号，可修改连接符
+			var str = arra.join(",");
+			console.log(str);
+			console.log(typeof str);
+			
+			// reverse()
+			// 会对原数组产生影响
+			arra.reverse();
+			console.log(arra);
+			
+			var arrc = [3,2,5,19]
+			// sort()
+			// 会对原数组产生影响，默认按照unicode编码排序，因此对数字排序会得出错误结果
+			// arra.sort();
+			// console.log(arra)
+			// 可以在sort()添加一个回调函数，来指定排序规则
+			// a下标一定在b前面
+			arrc.sort(function(a,b){
+				return a-b;
+			})
+			// 浏览器会根据sort函数回调的返回值决定顺序,若返回大于0的值，则元素交换位置,
+            //返回小于0的值则不换位置，
+            //等于0则相等
+			console.log(arrc)
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

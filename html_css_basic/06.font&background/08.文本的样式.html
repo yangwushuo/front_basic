@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文本的样式</title>
+    <style>
+        .box1{
+            /* 
+                text-decoration 设置文本修饰
+                    可选值：
+                        none 什么都没有
+                        underline 下划线
+                        line-through 删除线
+                        overline 上划线
+            */
+
+            /* text-decoration: overline; */
+            text-decoration: underline red dotted;
+        }
+
+        .box2{
+            width: 200px;
+            /* 
+                white-space 设置网页如何处理空白
+                    可选值：
+                        normal 正常
+                        nowrap 不换行
+                        pre 保留空白
+            */
+            white-space: nowrap;
+            /* 溢出截取 */
+            overflow: hidden;
+            /* 设置遮挡文字使用省略号... */
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="box2">Lasdjfaklwejf  jadsjfoiawejofja   ajsdfjaklfj2q2kjf iojaodijf ajf aefj ak jakj klajsdklfjawejf klawej </div>
+    <div class="box1">今天天气真不错</div>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            /* 
+                开启绝对定位
+            */
+            position: absolute;
+        }
+        body{
+            width: 500px;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box1"></div>
+</body>
+<script>
+    var box1 = document.getElementById("box1");
+    document.onmousemove = function(event){
+        //获取x，y
+        //pageX可以获取鼠标相对于当前页面的坐标
+        var x = event.pageX;
+        var y = event.pageY;
+        //设置div位置
+        box1.style.left = x-50+"px";
+        box1.style.top = y-50+"px";
+
+    };
+</script>
+</html>

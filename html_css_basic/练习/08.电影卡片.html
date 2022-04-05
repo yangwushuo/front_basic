@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电影卡片</title>
+    <link rel="stylesheet" href="css/replay.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* 设置外层容器 */
+        .outer{
+            width: 240px;
+            margin: 100px auto;
+            /* 阴影 */
+            box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+        }
+
+        /* 设置图片 */
+        .img-wrapper img{
+            width: 100%;
+            vertical-align: bottom;
+        }
+
+        .info{
+            padding: 0 18px;
+        }
+
+        /* 设置标题 */
+        .info .title{
+            color: #717171;
+            font-size: 18px;
+            margin: 13px 0px 15px 0px;
+        }
+
+        .info .category span{
+            margin-left: 4px;
+            margin-right: 7px;
+        }
+
+        /* 设置简介的样式 */
+        .info .intro{
+            margin: 18px 4px;
+            line-height: 20px;
+        }
+
+        /* 设置下边样式 */
+        .star-wrapper{
+            height: 46px;
+            line-height: 46px;
+            border-top: 1px solid #e9e9e9;
+            color: #ddd;
+            padding: 0 16px;
+        }
+
+        /* 设置星星样式 */
+        .star-wrapper .star{
+            float: left;
+        }
+
+        .star-wrapper .light{
+            color: #b9cb41;
+        }
+
+        .star-wrapper .fa-wechat{
+            float: right;
+            margin-top: 16px;
+        }
+
+    </style>
+</head>
+<body>
+    
+     <!-- 创建一个外层容器 -->
+     <div class="outer">
+         <!-- 创建一个图片容器 -->
+         <div class="img-wrapper">
+             <!-- 设置图片 -->
+             <img src="img/7-140126204053.jpg" alt="">
+         </div>
+         <!-- 创建内容区容器 -->
+         <div class="info">
+            <h2 class="title">
+                动画电影
+            </h2>
+            <h3 class="category">
+                <span class="fa fa-map-marker"></span>
+                动画
+            </h3>
+            <p class="intro">这是一部迪士尼的动画电影，非常好看</p>
+         </div>
+         <!-- 创建评分的容器 -->
+         <div class="star-wrapper">
+            <!-- 创建星星 -->
+            <ul class="star">
+                <li class="fa fa-star-o light"></li>
+                <li class="fa fa-star-o light"></li>
+                <li class="fa fa-star-o"></li>
+                <li class="fa fa-star-o"></li>
+            </ul>
+            <!-- 图标 -->
+            <span class="fa fa-wechat"></span>
+         </div>
+     </div>
+
+</body>
+</html>

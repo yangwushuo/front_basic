@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音视频</title>
+</head>
+<body>
+    
+    <!-- 
+        audio 标签用来向页面中引入一个外部的音频文件
+            音视频文件引入时，默认情况下不允许用户自己控制播放和停止
+            属性：
+                src 定位音视频文件的路径
+                controls 如果有该属性，则允许用户自己控制播放和停止
+                autoplay 音频是否自动播放 
+                    注意：如果设置了autoplay 则音乐在打开页面时会自动播放
+                        但是目前来讲大部分浏览器都不支持自动播放功能
+                lopp 循环 
+     -->
+    <audio src="" controls autoplay></audio>
+
+    <!-- 
+        除了通过src来指定外部文件的路径以外
+        还可以通过source来指定文件的路径
+        如果有多个source来指定路径则浏览器会根据最优挑选一个
+        如果所有外部文件格式，浏览器都不支持，可以添加一段文字来进行提示
+
+     -->
+     <audio autoplay>
+         您的浏览器不支持播放
+         <source src="">  
+         <source src="">
+     </audio>
+
+     <!-- 
+        video 标签用来向页面中引入一个视频文件 （使用方式和audio基本一样）
+        属性：
+            autoplay 自动播放
+            src 路径
+      -->
+      <video src=""></video>
+
+      <!-- 还可以使用source来指定路径 -->
+      <video>
+          <source src="">
+      </video>
+</body>
+</html>

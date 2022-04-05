@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高度塌陷最终解决方法</title>
+    <style>
+
+        .box1{
+            border: 10px solid red;
+        }
+
+        .box2{
+            width: 100px;
+            height: 100px;
+            background-color: #bfa;
+            float: left;
+        }
+
+        .box3{
+            clear: both;
+        }
+
+        /* 推荐使用::after给div最后加一个空字符设置元素样式来达到效果 */
+        .box1::after{
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="box1">
+        <div class="box2"></div>
+        <!-- 不推荐使用添加一个空div来达到效果 -->
+        <!-- <div class="boxe"></div> -->
+    </div>
+
+</body>
+</html>

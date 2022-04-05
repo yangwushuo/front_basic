@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /* 
+        Location
+            -该对象中封装了浏览器的地址栏的信息
+    */
+   //直接打印location可以获取当前页面的完整路径
+    console.log(location);
+    //直接修改成百度
+    location = "https://www.baidu.com";
+    //assign()用来跳转到其他的页面，作用和直接修改location一样
+    location.assign("https://www.baidu.com")
+    //reload() 用来重新加载当前页面，作用和帅新按钮一样
+    //如果传入参数为true则是强制清空缓存刷新
+    location.reload(true);
+    //replace()可以使用一个新的页面替换当前页面，调用完毕也会跳转页面
+    //不会生成历史记录
+    location.replace();
+
+</script>
+</html>

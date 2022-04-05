@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <button id="btn01">点我一下</button>
+    <br><br>
+    <div id="box1"></div>
+
+    <script>
+        var btn01 = document.getElementById("btn01");
+        var box1 = document.getElementById("box1");
+
+        btn01.onclick = function(){
+            /* 
+                clientWidth
+                clientHeight
+                    -这个两个属性可以获取元素的可见宽度和高度
+                    -这些属性都是不带px的，返回都是一个数字，可以直接进行计算
+                    -会获取元素宽度和高度，包括内容区和内边距
+                    -这些属性都是只读的
+            */
+           alert(box1.clientWidth);
+           alert(box1.clientHeight);
+
+           /* 
+                offsetWidth
+                offsetHeight
+                    -获取元素的整个的宽度和高度 ，包括内容区、内边距和边框
+           */
+            alert(box1.offsetWidth);
+
+            /* 
+                    offsetParent
+                        -可以用来获取当前元素的定位父元素
+                        -会获取到离当前元素最近的开启了定位的祖先元素
+                            如果所有的祖先元素都没有开启定位，则返回body
+            */
+            var op = box1.offsetParent;
+            alert(op);
+
+            /* 
+                offsetLeft
+                    -当前元素相对于其定位父元素的靠左距离
+                offsetTop
+                    -靠顶部距离
+            */
+            alert(box1.offsetLeft);
+
+            /* 
+                scrollWidth
+                scrollHeight
+                    -可以获取元素整个滚动区域的宽度和高度
+            */
+            alert(box1.scrollWidth);
+
+            /* 
+                scrollLeft
+                    -可以获取水平滚动条滚动的距离
+                scrollTop
+                    -可以获取垂直滚动条滚动的距离
+            */
+           alert(box1.scrollTop);
+        }
+    </script>
+</body>
+</html>

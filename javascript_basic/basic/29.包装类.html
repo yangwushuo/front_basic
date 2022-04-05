@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /* 
+            在js中为我们提供了三个包装类，通过这三个包装类可以将基本数据类型转换为对象
+            String() 可以将基本数据类型字符串转换为String对象
+            Number() 数值转对象
+            Boolean() 布尔值转对象
+            但是注意：我们在实际应用中不会使用基本数据类型的对象
+                如果使用基本数据类型的对象，在进行比较时可能会带来一些不可预期的结果
+        */
+       //创建一个Number类型的对象
+       var num = new Number(3);
+       var str = new String("jason");
+       var bool = new Boolean(true);
+
+       //向num中添加一个属性
+       num.hello = "afaa";
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /* 
+        History
+            -对象可以用来操作浏览器向前或向后翻页
+    */
+   //length返回本页历史记录总数
+   console.log(history.length);
+   //back用来回退到上一个页面
+   history.back();
+   //forward 可以前往下一个页面
+   history.forward();
+   //go 可以用来跳转到指定的页面 1表示向前跳转一个页面，2表示向前跳转两个页面
+   //-1向后跳转一个页面，-2向后跳转两个页面
+   history.go(2);
+</script>
+</html>

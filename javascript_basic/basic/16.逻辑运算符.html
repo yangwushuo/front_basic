@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /* 
+            js中为我们提供了三种逻辑运算符
+            -! 非
+                -! 可以用来对一个值进行非运算
+                -所谓非运算就是值对一个布尔值进行取反操作
+                    true变false，false变true
+                -如果对一个值进行两次取反，它的值不会改变
+                -如果对非布尔值进行计算，则会将其转换为布尔值，然后再取反
+                    所以我们可以利用该特点，来将一个其他的数据类型转换为布尔值
+                    可以为一个任意数据类型取两次反，来将其转换为布尔值，
+                    原理和Boolean()函数一样 
+            -&& 与
+                -可以对符号两侧的值进行与运算并返回结果
+                -运算规则
+                    - 只有两个值都为true时，才会返回true 
+                    - js中的"与“属于短路的与
+                        如果第一个值为false 则不会看第二个值
+            -||或
+                -||可以对符号两侧的值进行或运算并返回结果  
+                -运算规则：
+                    -两个值中只要有一个true就返回true
+                        如果两个值都为false，才返回false
+                    -js中的或属于短路的或
+                        如果第一个值为true则不会检查第二个值
+
+            -非布尔值情况下
+                -对于非布尔值进行与或运算时
+                    会先将其转换为布尔值，然后再运算，并且返回原值
+                -与运算：
+                    -如果第一个值为true，则必然返回第二个值
+                    -如果第一个值为false，则直接返回第一个值
+                -或运算：
+                    -如果第一个值为true，则直接返回第一个值
+                    -如果第一个值为false，则返回第二个值
+        */
+       var a = false;
+
+        //对a进行非操作
+        a = !a;
+
+        var b = 10;
+        b = !b; //flase 对非布尔值进行计算 10变true再取反
+
+        var result = true && true; 
+
+        result = true && false; // false
+        result = true && true; // true
+
+        result = false || false; //false
+        console.log(result);
+
+        //非布尔值
+        var result = 1 && 2; //结果：2  与运算：如果两个值都为true，则返回后边的值
+        result = 0 && 2;
+        result = 2 && 0;//如果有false则返回false
+
+        //如果两个值中有false则返回靠前的false
+        result = NaN && 0;
+        result = 0 && NaN;
+
+        //如果第一个值为true，则直接返回第一个值
+        result = 2 || 1;
+        result = 2 || NaN;
+        result = 2 || 0;
+
+        //如果第二个值时false则直接返回第二个
+        result = false || 2;
+
+        console.log(result);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

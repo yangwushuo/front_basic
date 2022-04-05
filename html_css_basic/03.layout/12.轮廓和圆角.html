@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮廓和圆角</title>
+    <style>
+        .box1{
+            width: 200px;
+            height: 200px;
+            background-color: #bfa;
+
+            /*
+                box-shadow用来设置元素的阴影效果，阴影不会影响到页面的布局
+                第一个值x 左侧偏移量 设置阴影的水平位置，正值向右移动，负值向左移动
+                第二个值y 垂直偏移量 设置阴影的垂直位置，正值向下移动，负值向上移动
+                第三个值 阴影的模糊半径
+                第四个值 阴影的颜色 可以使用rbga带透明
+            */
+            box-shadow: 10px 10px 20px black;
+            /* 
+                outline和border的区别 用法都一样
+                轮廓和边框的区别，outline用来设置元素的轮廓线，用法和border一摸一样
+                轮廓和边框的不同，就是轮廓不会影响到整个布局，而边框会影响到整个布局
+            */
+        }
+
+        .box2{
+            width: 200px;
+            height: 200px;
+            background-color: orange;
+
+            /*
+                border-radius 用来设置圆角 圆角设置的圆的半径大小
+                四个值分别指定四个角 左上 右上 右下 左下
+                三个值：左上 右上/左下 右下
+                两个值：左上/右下 右上/左下
+                border-top-left-radius 设置左上圆角
+                border-top-right-radius 设置右上圆角
+                border-bottom-left-radius 设置左下圆角
+                border-bottom-right-radius 设置右下圆角
+                第一个值设置x的弧度
+                第二个值设置y的弧度
+            */
+            border-radius: 10px;
+
+            /*
+                将元素设置为一个圆形
+                border-radius: 50%
+            */
+        }
+    </style>
+</head>
+<body>
+    <div class="box1"></div>
+    <div class="box2"></div>
+</body>
+</html>

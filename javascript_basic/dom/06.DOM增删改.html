@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="content">
+			<div id="formlist">
+				<div class="inner">
+					<p>你喜欢哪个城市</p>
+					<ul id="city">
+						<li id="bj">北京</li>
+						<li>上海</li>
+						<li>广州</li>
+						<li>杭州</li>
+					</ul>
+					<br />
+					<br />
+					<p>你喜欢哪款游戏</p>
+					<ul id="game">
+						<li id="gta">gta</li>
+						<li>csgo</li>
+						<li>destiny2</li>
+						<li>dota2</li>
+					</ul>
+					<br />
+					<br />
+					<p>你的手机操作系统是</p>
+					<ul id="phone">
+						<li>Ios</li>
+						<li id="android">Android</li>
+						<li>鸿蒙</li>
+					</ul>
+					<br />
+					<br />
+				</div>
+				<br />
+				<div class="inner">
+					<p>gender:</p>
+					<input class="test" type="radio" name="gender" value="male" />
+					male
+					<input type="radio" name="gender" value="female" />
+					female
+					<br />
+					<p>name:</p>
+					<input type="text" name="name" id="username" value=""/>
+					<br />
+					<br />
+				</div>
+			</div>
+			
+			<div id="btnlist">
+				<div><button id="btn01">查找广州节点使用 appendChild</button></div>
+				<div><button id="btn07">查找广州节点使用 innerHTML</button></div>
+				<div><button id="btn02">查找北京前面插入广州</button></div>
+				<div><button id="btn03">使用广州节点替换#bj节点</button></div>
+				<div><button id="btn04">删除#bj节点</button></div>
+				<div><button id="btn05">读取#city内的HTML代码</button></div>
+				<div><button id="btn06">设置#bj内的HTML代码</button></div>
+			</div>
+		</div>
+		<script>
+
+			function myClick(idStr, fun){
+				var btn = document.getElementById(idStr);
+				btn.onclick = fun;
+			}
+
+			//创建一个广州节点，添加到#city下
+			myClick("btn01",function () {  
+				//创建广州节点
+				//创建li元素节点
+				/* 
+					document.createElement()
+						可以用于创建一个元素节点对象
+						他需要一个标签名作为参数，将会根据该标签名创建元素节点对象
+						并将创建好的对象作为返回值
+				*/
+				var li = document.createElement("li");
+				//创建广州文本节点
+				/* 
+					document.createTextNode()
+						可以用来创建一个文本节点对象
+						需要一个文本内容作为参数，将会根据内容创建文本节点，并将新的节点返回
+				*/
+				var cityName = document.createTextNode("广州");
+
+				//将文本节点设置为li的子节点，也就是相结合
+				/* 
+					appendClid()
+						向一个父节点中添加一个新的子节点
+						用法：父节点.appendChlid(子节点);
+				*/
+				li.appendChild(cityName);
+
+				//获取id为city的节点
+				var city = document.getElementById("city");
+				//将广州节点添加到#city中
+				city.appendChild(li);
+
+			})
+
+			//将广州节点插入到#bj前面
+			myClick("btn02", function(){
+				//创建一个广州
+				var li = document.createElement("li");
+				var cityName = document.createTextNode("广州");
+				li.appendChild(cityName);
+
+				var city = document.getElementById("city");
+				var beijing = document.getElementById("bj");
+
+				/* 
+					insertBefore()
+						可以在指定的子节点前面插入新的节点
+						语法：
+							父节点.insertBefore(新节点,旧节点);
+				*/
+				city.insertBefore(li,beijing);
+			})
+
+			//使用广州节点替换#bj节点
+			myClick("btn03", function(){
+				//创建一个广州
+				var li = document.createElement("li");
+				var cityName = document.createTextNode("广州");
+				li.appendChild(cityName);
+
+				var city = document.getElementById("city");
+				var beijing = document.getElementById("bj");
+
+				/* 
+					replaceChild()
+						可以使用指定的子节点替换已有的子节点
+						语法：
+							父节点，replaceChild(新节点,旧节点);
+				*/
+				city.replaceChild(li,beijing);
+			})
+
+			//删除#bj节点
+			myClick("btn04", function(){
+				var city = document.getElementById("city");
+				var beijing = document.getElementById("bj");
+
+				/* 
+					removeChild()
+						可以删除一个节点
+						语法：父节点.removeChild(子节点);
+				*/
+				city.removeChild(beijing);
+			})
+
+			//读取#city内的HTML代码
+			myClick("btn05", function(){
+				var city = document.getElementById("city");
+				alert(city.innerHTML);
+			})
+
+			//设置#bj内的HTML代码
+			myClick("btn06", function(){
+				var bj = document.getElementById("bj");
+				
+			})
+
+			//使用innerHTML添加
+			myClick("btn07", function(){
+				var city = document.getElementById("city");
+				city.innerHTML += "<li>广州</li>";
+			})
+		</script>
+	</body>
+</html>
+
+
+<style type="text/css">
+	p{
+		color: #333333;
+		margin: 0.3125rem;
+	}
+	ul{
+		list-style-type:none
+	}
+	li{
+		color: #666666;
+		background-color: #f2f2f2;
+		border: 0.0625rem solid #d4d4d4;
+		border-radius:0.3125rem ;
+		float: left;
+		margin: 0.3125rem;
+		padding: 0.3125rem;
+	}
+	input{
+		margin: 0.3125rem;
+	}
+	button{
+		width: 18.75rem;
+		margin: 0.3125rem;
+		padding: 0.3125rem;
+		color: #333333;
+		border-radius:0.3125rem ;
+		background-color: #f2f2f2;
+		border:0.0625rem solid #d4d4d4;
+	}
+	#content{
+		width: 62.5rem;
+		margin:3.125rem auto;
+	}
+	#btnlist{
+		float: left;
+	}
+	#formlist{
+		float: left;
+	}
+	.inner{
+		border: 0.0625rem solid #d4d4d4; 
+		margin: 0.3125rem;
+		border-radius: 0.625rem;
+		width: 31.25rem;
+	}
+</style>

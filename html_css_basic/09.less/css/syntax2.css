@@ -1,0 +1,37 @@
+.box1 .box2 {
+  color: red;
+}
+.box1 > .box3 {
+  color: red;
+}
+.box1 > .box3:hover {
+  color: blue;
+}
+.box1:hover {
+  color: orange;
+}
+div .box1 {
+  width: 100px;
+}
+.p1,
+.p2 {
+  width: 1000px;
+  height: 200px;
+}
+.p2 {
+  color: blue;
+}
+.p3 {
+  width: 1000px;
+  height: 200px;
+}
+.p5 {
+  width: 200px;
+  height: 100px;
+  background-color: #bfa;
+}
+div {
+  width: 300px;
+  height: 100px;
+  border: red 1px solid;
+}
