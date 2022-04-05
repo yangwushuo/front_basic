@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let number = 99;
+        let person = {
+            name: 'Jason',
+            sex: '男'
+        }
+
+        Object.defineProperty(person, 'age', {
+            value: 19,
+            enumerable: true, //控制属性是否可以枚举，也就是是否可以被遍历到，默认值是false默认不能遍历
+            writable: true, //控制属性是否可以被修改，默认值是false默认不能被修改
+            configurable: true,  //控制属性是否可以被删除，默认值是false不能被删除
+
+            //当有人读取person的age属性时，get函数(getter)就会被调用，且返回值就是age的值
+            get(){
+                console.log('正在读取age属性值');
+                //直接返回number的值，代表age的值，只要number的值变动，age也会跟随变动，类似于指针
+                return number;
+            },
+
+            //当有人修改person的age属性时，set函数(setter)就会被调用，且会收到修改的具体值
+            set(value){
+                console.log('正在修改age属性值');
+                //直接修改number的值，因为调用age值时会调用get方法，读取number的值，这里修改number，age值也会变动
+                number = value;  
+            }
+        })
+
+        console.log(person);
+    </script>
+</body>
+
+</html>
