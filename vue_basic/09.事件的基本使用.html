@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 
+        事件的基本使用:
+            1.使用v-on:xxx 或 @xxx 绑定事件，其中xxx是事件名;
+            2.事件的回调需要配置在methods对象中，最终会在vm上;
+            3.methods中配置的函数,不要用箭头函数！否则this就不是vm了;
+            4.methods中配置的函数，都是被vue所管理的函数，this的指向是vm或组件实例对象；
+            5.@click="demo" 和 @click = "demo($event)" 效果一致，但后者可以传参
+     -->
+   
+    <!-- 容器 -->
+    <div id="root">
+        <h2>欢迎来到{{name}}</h2>
+        <!-- 写法 -->
+        <!-- <button v-on:click="showInfo"></button> -->
+        <!-- 简写 -->
+        <button @click="showInfo1">点我提示信息1(不传参)</button>
+        <!-- 这里点击函数可以直接传入参数，vue使用$event代表event参数 按顺序传入参数 -->
+        <button @click="showInfo2($event,66)">点我提示信息2(传参)</button>
+    </div>
+
+    <script type="text/javascript" src="./js/vue.js"></script>
+    <script>
+        //阻止vue在启动时生成生产提示
+        Vue.config.productionTip = false; 
+
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                name: '南京大学',
+            },
+            methods: {
+                //注意不能使用箭头函数
+                //标准写法
+                // showInfo1: function(){
+
+                // }
+
+                showInfo1(){
+                    alert("我是提示信息1");
+                },
+        
+                showInfo2(event,number){
+                    alert("我是提示信息number:"+number);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
