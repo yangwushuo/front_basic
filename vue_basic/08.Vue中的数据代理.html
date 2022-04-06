@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 
+        1.Vue中的数据代理:
+            通过vm对象来代理data对象中属性的操作(读/写)
+        2.Vue中数据代理的好处:
+            更加方便的操作data中的数据
+        3.基本原理:
+            通过Object.defineProperty()把data对象中所有属性添加到vm上。
+            为每一个添加到vm上的属性，都指定一个getter/setter
+            在getter/setter内部去操作(读/写)data中对象的属性。
+
+        总结:
+            我们定义的data数据，vue实例会去进行代理，代理成数据属性 _data，为data数据生成
+            get和set方法，如果修改data数据会调用set进行修改，修改完成被vue检测到会自动调用get方法
+            将最新的数据渲染到页面上
+     -->
+    
+    <!-- 容器 -->
+    <div id="root">
+        <h2>学校名称:{{name}}</h2>
+        <h2>学校地址:{{address}}</h2>
+    </div>
+
+    <script type="text/javascript" src="./js/vue.js"></script>
+    <script>
+        //阻止vue在启动时生成生产提示
+        Vue.config.productionTip = false; 
+
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                name: '南京大学',
+                address: '南京仙林'
+            }
+        });
+    </script>
+</body>
+</html>
