@@ -40,11 +40,24 @@
                 }
             },
             computed:{
+
+                /* 
+                    如果只是使用get方法获取数据，而不是用set修改，则可以直接简写
+                */
+                // 第一种简写: 匿名函数默认为get方法
+                // fullName: function(){
+                //     return "简写";
+                // },
+                // 第二种简写: 这不是一个函数，fullName是计算属性名字，而后面则都是默认为get方法
+                // fullName(){
+                //     return "简写";
+                // },
+
                 fullName:{
                     /* 
                         当有地方读取fullName时，get就会被调用，且返回值就作为fullName的值
-                        1.初次读取fullName时 因为是第一个调用fullName读取到值后会被缓存机制缓存起来
-                        2.所依赖的数据发生变化时，也就是如果get方法中有数据在外部发生变化时，也会调用get方法重新渲染一遍
+                            1.初次读取fullName时 因为是第一个调用fullName读取到值后会被缓存机制缓存起来
+                            2.所依赖的数据发生变化时，也就是如果get方法中有数据在外部发生变化时，也会调用get方法重新渲染一遍
                     */
                     get(){
                         return this.firstName + '-' + this.lastName;
