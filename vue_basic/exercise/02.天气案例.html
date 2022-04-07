@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 容器 -->
+    <div id="root">
+        <h2>今天天气很{{info}}</h2>
+        <!-- 绑定事件的时候: @xxx="yyy" yyy中可以写一些简单的语句 -->
+        <!-- <button @click="isHot = !isHot">切换天气</button> -->
+        <button @click="changeWeather">切换天气</button>
+    </div>
+
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript">
+        Vue.config.productionTip = false;
+
+        new Vue({
+            el: '#root',
+            data(){
+                return {
+                    isHot: true
+                }
+            },
+            computed:{
+                info(){
+                    return this.isHot? '很热' : '很凉爽'
+                }
+            },
+            methods: {
+                changeWeather(){
+                    this.isHot = !this.isHot
+                }
+            }
+        })
+    </script>
+</body>
+</html>
