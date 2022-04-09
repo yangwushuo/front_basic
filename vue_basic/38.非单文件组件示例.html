@@ -7,7 +7,127 @@
     <title>非单文件组件示例</title>
 </head>
 <body>
-    
-    <script src="./"></script>
+
+    <!-- 
+        Vue中使用组件的三大步骤:
+            一、定义组件(创建组件)
+            二、注册组件，将组件注册到对应的vue实例中
+            三、使用组件(写组件标签)
+        一、如果定义一个组件?
+            使用Vue.extend(options)创建组件，其中options和new Vue(options)时闯入的那个options几乎一样，但也有点区别
+            区别如下:
+                1.el不要写，为什么？--最终所有的组件都要经过一个vm的管理，由vm中的el决定服务哪个容器。
+                2.data必须写成函数式，为什么？ --避免组件被复用时，数据存在引用关系
+            备注: 使用template可以配置组件结构
+        二、如何注册组件?
+            1.局部注册: 靠new Vue的时候传入components选项
+            2.全局注册: 靠Vue.component('组件名',组件)
+        三、编写组件标签
+            <school></school>
+     -->
+
+     <!-- 容器 -->
+    <div id="root1">
+        <h1>{{str}}</h1>
+        <!-- 第三步 组件标签 -->
+        <!-- 标签名就是在绑定的容器vm中注册的组件名字，vue会直接将标签取掉，渲染指定组件的模板 -->
+        <school></school>
+        <hr>
+        <student></student>
+        <hr>
+    </div>
+
+    <div id="root2">
+        <h1>{{str}}</h1>
+        <news></news>
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script>
+        Vue.config.productionTip = false;
+
+        //第一步 创建的组件school
+        const school = Vue.extend({
+            //组件模板，直接渲染到对应的标签命中
+            template: `
+                <div>
+                    <h1>学校名:{{name}}</h1>
+                    <h1>地址:{{address}}</h1>
+                </div>
+            `,
+            data() {
+                return {
+                    name: '南京大学',
+                    address: '中国南京栖霞区'
+                }
+            },
+            methods: {
+                addNum(){
+
+                }
+            },
+        });
+        //创建组件student
+        const student = Vue.extend({
+            template: `
+                <div>
+                    <h1>学生名:{{name}}</h1>
+                    <h1>年龄:{{age}}</h1>
+                </div>
+            `,
+            data() {
+                return {
+                    name: '南京大学',
+                    age: 20
+                }
+            },
+        });
+        //创建组件news
+        const news = Vue.extend({
+            template: `
+                <div>
+                    <span>{{text}}</span>
+                </div>
+            `,
+            data() {
+                return {
+                    text: '习近平总书记在北京冬奥会、冬残奥会总结表彰大会上点赞这些意蕴隽永的场景。'
+                }
+            },
+        });
+
+        //全局组件注册，可以多个vm共享一个组件
+        //(组件名字,组件实例)
+        Vue.component('news',news)
+
+        //创建vm绑定root1
+        new Vue({
+            el: '#root1',
+            data(){
+                return{
+                    str: '这是root1组件'
+                }
+            },
+            //第二步 局部组件注册
+            components:{
+                school,
+                student
+            }
+        })
+
+        //创建vm绑定root2
+        new Vue({
+            el: '#root2',
+            data(){
+                return{
+                    str: '这是root2组件'
+                }
+            },
+            components:{
+                // news
+            }
+        })
+
+    </script>
 </body>
 </html>
