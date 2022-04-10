@@ -18,7 +18,7 @@
         },
         methods: {
             showInfo(){
-                alert('学生性别',this.sex);
+                alert('学生性别'+this.sex);
             }
         },
     }

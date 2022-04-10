@@ -37,7 +37,7 @@
         },
         methods: {
             showInfo(){
-                alert("城市:",this.city);
+                alert("城市:"+this.city);
             }
         },
     }
