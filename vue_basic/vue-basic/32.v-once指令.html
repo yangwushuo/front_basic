@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 
+        v-once指令:
+            1.v-once所在节点在初次动态渲染后，就视为静态内容了
+            2.以后数据的改变不会引起v-once所在结构的更新可以用于优化性能
+        总结：也就是初始该标签只渲染一遍，此后修改不再渲染该标签
+     -->
+
+    <!-- 一个容器 -->
+    <div id="root">
+        <h1 v-once>初始化值:{{num}}</h1>
+        <h1>初始化值:{{num}}</h1>
+        <button @click="num++">自增</button>
+    </div>
+    
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript">
+        //阻止vue在启动时生成生产提示
+        Vue.config.productionTip = false; 
+
+        //创建Vue实例
+        new Vue({
+            el: '#root', 
+            data() {
+                return {
+                    num: 1
+                }
+            },
+        })
+    </script>
+</body>
+</html>

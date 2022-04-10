@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 容器 -->
+    <div id="root">
+        <h2>a:{{a}}</h2>
+        <button @click="a++">a++</button>
+
+    </div>
+
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript">
+
+        Vue.config.productionTip = false;
+
+        const vm = new Vue({
+            el: '#root',
+            data(){
+                return {
+                    a: 1
+                }
+            },
+            watch: {
+                // a:{
+                //     handler(newV,oldV){
+                //         console.log("a 新数据:", newV, "旧数据:", oldV);
+                //     }
+                // }
+                
+                //简写，如果监视的数值，不需要配置比如deep:true这样的配置，只有一个回调函数,那就可以使用简写
+                //直接赋予函数
+                a(newV, oldV){
+                    console.log("a 新数据:", newV, "旧数据:", oldV);
+                }
+            },      
+        });
+
+    </script>
+</body>
+</html>

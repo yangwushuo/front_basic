@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 
+        需求1: 定义一个v-big指令，和v-text功能类似，但会把绑定的数值放大10倍
+        需求2: 定义一个v-fbind指令，和v-bind功能类似，但可以让其所绑定的input元素默认获取焦点
+     -->
+
+    <!-- 
+        需求1：定义一个v-big指令，和v-text功能类似，但会把绑定的数值放大10倍。
+        需求2：定义一个v-fbind指令，和v-bind功能类似，但可以让其所绑定的input元素默认获取焦点。
+        自定义指令总结：
+                一、定义语法：
+                            (1).局部指令：
+                                        new Vue({															new Vue({
+                                            directives:{指令名:配置对象}   或   		directives{指令名:回调函数}
+                                        }) 																		})
+                            (2).全局指令：
+                                            Vue.directive(指令名,配置对象) 或   Vue.directive(指令名,回调函数)
+
+                二、配置对象中常用的3个回调：
+                            (1).bind：指令与元素成功绑定时调用。
+                            (2).inserted：指令所在元素被插入页面时调用。
+                            (3).update：指令所在模板结构被重新解析时调用。
+
+                三、备注：
+                            1.指令定义时不加v-，但使用时要加v-；
+                            2.指令名如果是多个单词，要使用kebab-case命名方式，不要用camelCase命名。
+                                    比如: v-good-boy 那么绑定指令时必须使用'good-boy': function(){}
+    -->
+
+    <!-- 一个容器 -->
+    <div id="root">
+        <h2>{{name}}</h2>
+        <h2>当前的n值是:<span v-text="num"></span></h2>
+        <h2>放大10倍后的n值是: <span v-big="num"></span></h2>
+        <button @click="num++">点我n+1</button>
+        <input type="text" v-fbind:value="num">
+    </div>
+    
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript">
+        //阻止vue在启动时生成生产提示
+        Vue.config.productionTip = false; 
+
+        //定义全局自定义指令 Vue.directive第一个参数是指令的名字（不需要写上v-前缀），第二个参数可以是对象数据，也可以是一个指令函数
+        /* Vue.directive(fbind, {
+            bind: function(el, binding){
+
+            },
+            // 当被绑定的元素插入到 DOM 中时……
+            inserted: function (el, binding) {
+                // 聚焦元素
+                el.focus()  // 页面加载完成之后自动让输入框获取到焦点的小功能
+            },
+            update: function(){
+
+            }
+        }) */
+
+        //创建Vue实例
+        new Vue({
+            el: '#root', 
+            data() {
+                return {
+                    name: 'Jason',
+                    num: 1
+                }
+            },
+            directives:{
+                /*  
+                    element：指令所绑定的元素，可以用来直接操作 DOM
+                    binding：一个对象，包含以下 property：
+                        `name`：指令名，不包括 v- 前缀。
+                        `value`：指令的绑定值，例如：v-my-directive="1 + 1" 中，绑定值为 2。
+                        `oldValue`：指令绑定的前一个值，仅在 update 和 componentUpdated 钩子中可用。无论值是否改变都可用。
+                        `expression`：字符串形式的指令表达式。例如 v-my-directive="1 + 1" 中，表达式为 "1 + 1"。
+                        `arg`：传给指令的参数，可选。例如 v-my-directive:foo 中，参数为 "foo"。
+                        `modifiers`：一个包含修饰符的对象。例如：v-my-directive.foo.bar 中，修饰符对象为 { foo: true, bar: true }
+                        `vnode`：Vue 编译生成的虚拟节点
+                        `oldVnode`：上一个虚拟节点，仅在 update 和 componentUpdated 钩子中可用
+                */
+               //big自定义函数何时调用? 1.指令与元素成功绑定时(一上来)。2.指令所在的模板被重新解析时(也就是容器重新渲染的时候)
+                big(element, binding){
+                    element.innerText = binding.value * 10;
+                },
+                //需求2，需要使用完成写法
+                fbind:{
+                    //如果是需要插入页面完成后再进行操作，可以使用简写
+                    //指令与元素成功绑定时(一上来)
+
+                    /* 
+                        一个指令定义对象可以提供如下几个钩子函数 (均为可选)：
+                        inserted：被绑定元素插入父节点时调用 (仅保证父节点存在，但不一定已被插入文档中)。
+                        bind：只调用一次，指令第一次绑定到元素时调用。
+                        update：所在组件的 VNode 更新时调用，但是可能发生在其子 VNode 更新之前
+                        componentUpdated：指令所在组件的 VNode 及其子 VNode 全部更新后调用。
+                        unbind：只调用一次，指令与元素解绑时调用。
+                    */
+                    bind(element,binding){
+                        element.value = binding.value;
+                    },
+                    //指令所在元素被插入页面时
+                    inserted(element,binding){
+                        element.focus();
+                    },
+                    //指令所在的模板被重新解析时
+                    update(element,binding){
+                        element.value = binding.value;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

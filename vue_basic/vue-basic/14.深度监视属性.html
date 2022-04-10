@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 
+        深度监视:
+            (1).Vue中的watch默认不监测对象内部值的改变(一层)
+            (2).配置deep:true可以监测对象内部值改变(多层) 不管改变多少层数值监视都会触发
+        备注:
+            (1).Vue自身可以监测对象内部值的改变，但Vue提供的watch默认不可以！
+            (2).使用watch时根据数据的具体结构，决定是否采用深度监视
+     -->
+
+    <!-- 容器 -->
+    <div id="root">
+        <h2>a:{{number.a}}</h2>
+        <h2>b:{{number.b}}</h2>
+        <button @click="number.a++">a++</button>
+        <button @click="number.b++">b++</button>
+        <button @click="number = {a: 111, b:222}">change number</button>
+        <button @click="number.c.x = 2">change number c</button>
+    </div>
+
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript">
+
+        Vue.config.productionTip = false;
+
+        const vm = new Vue({
+            el: '#root',
+            data(){
+                return {
+                    number: {
+                        a: 1,
+                        b: 2,
+                        c: {
+                            x: 1
+                        }
+                    }
+                }
+            },
+            watch: {
+
+                /* 
+                    number,这里只监控了一个对象的变化，也就是如果改对象属性被覆盖，比如对象指向0x123地址，如果改变指向为0x444
+                        那么该监控才会被触发
+                    注意：如果改变number对象中a或者b的属性则不会触发监控，因为对象指向的地址没有发生改变，只改变了对象中某个属性值
+                        如果改变对象中属性值的时候，也能触发原本用本监控对象的操作，则添加一个 deep:true 该配置相当于打开了对象深度监控
+                */
+                number:{
+                    //开启深度监控，对象中属性被该变也会触发
+                    deep: true,
+
+                    handler(newV,oldV){
+                        console.log("number 新数据:", newV, "旧数据:", oldV);
+                    }
+                },
+
+                //number.a只监控一个对象中某个属性的变化
+                'number.a':{
+                    handler(newV,oldV){
+                        console.log("number.a 新数据:", newV, "旧数据:", oldV);
+                    }
+                }
+            },      
+        });
+
+    </script>
+</body>
+</html>
