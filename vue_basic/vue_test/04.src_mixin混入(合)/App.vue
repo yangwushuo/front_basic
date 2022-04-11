@@ -1,7 +1,6 @@
 <template>
 	<div>
 		<Student/>
-		<hr>
 		<School/>
 	</div>
 </template>

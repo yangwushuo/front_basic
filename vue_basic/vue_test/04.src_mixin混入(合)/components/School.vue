@@ -1,22 +1,27 @@
 <template>
     <div class="student">
-        <h2>学校名字:{{name}}</h2>
-        <h2>学校地址:{{address | mySlice}}</h2>
+        <h2 @click="showName">学校名字:{{name}}</h2>
+        <h2>学校地址:{{address}}</h2>
     </div>
 </template>
 
 <script>
+
+    import {hunhe1, hunhe2} from '../mixin.js';
 
     export default {
         name: 'School',
         data() {
             return {
                 name: '南京大学',
-                address: '南京栖霞区 邮编:2221000'
+                address: '南京栖霞区'
             }
         },
+        mounted() {
+            console.log("这是内部生命周期回调函数mounted");
+        },
+        mixins: [hunhe1,hunhe2]
     }
-
 </script>
 
 <style>
