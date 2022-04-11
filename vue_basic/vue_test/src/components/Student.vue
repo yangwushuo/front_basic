@@ -1,5 +1,5 @@
 <template>
-    <div class="student">
+    <div class="box">
         <h2>学生姓名:{{name}}</h2>
         <h2>学生性别:{{sex}}</h2>
     </div>
@@ -17,8 +17,8 @@
     }
 </script>
 
-<style>
-    .student{
+<style scope>
+    .box{
         background-color: yellowgreen;
         opacity: 0.8;
     }
