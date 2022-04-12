@@ -25,7 +25,23 @@
 		},
 		data() {
 			return {
-				todoList: JSON.parse(localStorage.getItem("todoList")) || []
+				todoList:[
+					{
+						id: '001', 
+						title: '抽烟', 
+						done: true
+					},
+					{
+						id: '002', 
+						title: '喝酒', 
+						done: true
+					},
+					{
+						id: '003', 
+						title: '烫头', 
+						done: false
+					},
+				]
 			}
 		},
 		methods: {
@@ -54,14 +70,6 @@
 				})
 			}
 		},
-		watch:{
-			todoList:{
-				deep: true,
-				handler(newValue){
-					localStorage.setItem("todoList", JSON.stringify(newValue));
-				}
-			}
-		}
 	}
 </script>
 
