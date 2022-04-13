@@ -4,17 +4,9 @@
 			<input type="checkbox" :checked="todo.done" @change="handleCheck(todo.id)"/>
 			<!-- 如下代码也能实现功能，但是不太推荐，因为有点违反原则，因为修改了props -->
 			<!-- <input type="checkbox" v-model="todo.done"/> -->
-			<span v-show="!todo.isEdit">{{todo.title}}</span>
-			<input  
-				type="text"
-				:value="todo.title"
-				v-show="todo.isEdit" 
-				@blur="handleBlur(todo,$event)"
-				ref="inputTitle"
-			/>
+			<span>{{todo.title}}</span>
 		</label>
-		<button class="btn btn-danger" @click="handleDelete(todo.id)" >删除</button>
-		<button class="btn btn-edit" @click="handleEdit(todo)" v-show="!todo.isEdit">编辑</button>
+		<button class="btn btn-danger" @click="handleDelete(todo.id)">删除</button>
 	</li>
 </template>
 
@@ -37,22 +29,6 @@
 					// this.deleteTodo(id)
 					this.$bus.$emit('deleteTodo',id)
 				}
-			},
-			handleEdit(todo){
-				console.log("开始编辑");
-				if(todo.hasOwnProperty('isEdit')){
-					console.log("赋值edit");
-					todo.isEdit = true;
-				}else{
-					console.log("添加edit");
-					this.$set(todo,'isEdit',true)
-				}
-			},
-			handleBlur(todo,e){
-				todo.isEdit = false;
-				var title = e.target.value;
-				if(!title.trim()) return alert("输入不能为空");
-				this.$bus.$emit('updateTodo',todo.id,title)
 			}
 		},
 	}

@@ -29,7 +29,7 @@
 			}
 		},
 		methods: {
-			addTodo(value){
+			addTodo(value){	
 				this.todoList.unshift(value);
 			},
 			checkTodo(id){
