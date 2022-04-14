@@ -19,6 +19,7 @@
 </template>
 
 <script>
+	import pubsub from 'pubsub-js'
 	export default {
 		name:'MyItem',
 		//声明接收todo
@@ -35,18 +36,22 @@
 				if(confirm('确定删除吗？')){
 					//通知App组件将对应的todo对象删除
 					// this.deleteTodo(id)
-					this.$bus.$emit('deleteTodo',id)
+					pubsub.publish("deleteTodo",id);
 				}
 			},
 			handleEdit(todo){
 				console.log("开始编辑");
 				if(todo.hasOwnProperty('isEdit')){
-					console.log("赋值edit");
 					todo.isEdit = true;
 				}else{
-					console.log("添加edit");
 					this.$set(todo,'isEdit',true)
 				}
+
+				//点击编辑按钮使输入框获取焦点
+				//nextTick:所有dom更新完毕再执行传入的函数
+				this.$nextTick(function(){
+					this.$refs.inputTitle.focus();
+				})
 			},
 			handleBlur(todo,e){
 				todo.isEdit = false;
