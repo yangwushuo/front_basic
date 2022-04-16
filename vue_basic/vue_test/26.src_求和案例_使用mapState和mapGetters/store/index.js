@@ -42,7 +42,6 @@ const mutations = {
     */
     AddSum(state, value){
         state.sum += value
-        console.log(state);
     },
     ReduceSum(state, value){
         state.sum -= value
@@ -51,12 +50,22 @@ const mutations = {
 
 //准备state 用于存储数据
 const state = {
-    sum: 0
+    sum: 0,
+    school: '南京大学',
+    subject: '软件工程'
+}
+
+//如果对数据需要做一些计算处理可以使用getters不会影响到state里面的真实数值
+const getters = {
+    bigSum(state){
+        return state.sum*10;
+    }
 }
 
 //创建并暴露store
 export default new Vuex.Store({
     actions,
     mutations,
-    state
+    state,
+    getters
 })
