@@ -21,8 +21,8 @@ export default {
         this.$router.forward();
       },
       test(){
-        //指定向前退的步长
-        this.$router.go(2);
+        //可以前进也可后退，正数向后退，负数向前进
+        this.$router.go(-1);
       }
     },
 }

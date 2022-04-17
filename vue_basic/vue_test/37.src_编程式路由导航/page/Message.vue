@@ -57,8 +57,5 @@
 				})
 			}
 		},
-		beforeDestroy() {
-			console.log("Message被销毁前");
-		},
 	}
 </script>
