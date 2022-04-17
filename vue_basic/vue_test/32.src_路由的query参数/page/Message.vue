@@ -2,14 +2,13 @@
 	<div>
 		<ul>
 			<li v-for="m in messageList" :key="m.id">
-				<!-- 第一种写法 路径中简单使用params参数形式 -->
-				<!-- <router-link :to="`/home/message/detail/${m.id}/${m.titile}`">{{m.title}}</router-link> -->
-				<!-- 第二种写法 路径使用对象形式对params使用 -->
+				<!-- 第一种写法 跳转路由并携带query参数，to的字符串写法 -->
+				<!-- <router-link :to="`/home/message/detail?id=${m.id}&title=${m.title}`">{{m.title}}</router-link> -->
+				<!-- 第二种写法 跳转路由并携带query参数，to的对象写法 -->
 				<router-link
 					:to="{
-						//如果使用对象形式，中还有params参数，必须使用命名路由，不能使用路径形式
-						name: 'detail',
-						params: {
+						path: '/home/message/detail',
+						query: {
 							id: m.id,
 							title: m.title	
 						}

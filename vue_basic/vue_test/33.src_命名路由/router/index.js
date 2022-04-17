@@ -37,25 +37,8 @@ export default new VueRouter({
                     children:[
 						{
                             name: 'detail',
-                            // 指定params参数的占位
-							path:'detail/:id/:title',
+							path:'detail',
 							component: Detail,
-
-                            //props的第一种写法，值为对象，该对象中的所有key-value都会以props形式传给Detail组件。
-                            //props:{a:1,b:'hello'}
-
-                            //props的第二种写法，值为布尔值，若布尔值为真，就会把该路由组件收到的所有params参数，以props的形式传给Detail组件
-                            //props: true
-
-                            //props的第三种写法，值为函数 vue-router会自动为该函数传递一个参数$router 可以使用{query} {params}直接获取对应参数
-                            //如果是qurey这种形式也可以只需要改一下形参就可以获取对应的数值
-                            props: function({params}){
-                                console.log('正在获取数据',params);
-                                return {
-                                    id: params.id,
-                                    title: params.title,
-                                }
-                            }
 						} 
 					]
 				}
