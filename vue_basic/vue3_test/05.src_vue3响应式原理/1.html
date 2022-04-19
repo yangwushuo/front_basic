@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /* 
+            vue3 响应式原理 //https://blog.csdn.net/qq_27127385/article/details/103959956
+        */
+        //源数据    
+        var person = {
+            name: 'jason',
+            age: 20,
+        };
+        //使用Proxy创建代理对象 参数：代理对象，重写方法
+        var personProxy = new Proxy(person,{
+            //获取代理数据 参数: 源数据,获取的参数名
+            get(target, proName){
+                console.log(`获取${proName}属性`);
+                //通过Reflect（反射）:  对源对象的属性进行操作
+                return Reflect.get(target,proName);
+            },
+            //修改或者插入代理数据 参数: 源数据,修改的参数名,修改的值
+            set(target, proName, value){
+                console.log(`修改${proName}属性`);
+                Reflect.set(target,proName,value);
+            },
+            //删除代理属性
+            deleteProperty(target, proName){
+                return Reflect.deleteProperty(target,proName);
+            },
+            
+        })
+
+
+
+    </script>
+</body>
+</html>
