@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+    <div id="main">
+
+    </div>
+    <script src="./js/echarts.js"></script>
+    <script>
+        // 基于准备好的dom，初始化echarts实例
+        //参数: dom容器 主题 参数
+        var myChart = echarts.init(document.getElementById('main'),'dark',{
+            width: document.documentElement.clientWidth || document.body.clientWidth,
+            height: '400px',
+        });
+        //如果窗口发生变化，调用回调函数
+        window.onresize = function() {
+            //除了直接调用 resize() 不含参数的形式之外，还可以指定宽度和高度，实现图表大小不等于容器大小的效果
+            //重设图标尺寸
+            myChart.resize({
+                width: document.documentElement.clientWidth || document.body.clientWidth,
+                height: '400px',
+            });
+        };
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: 'ECharts 入门示例'
+            },
+            tooltip: {},
+            legend: {
+                data: ['销量','销量1']
+            },
+            xAxis: {
+                data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+            },
+            yAxis: {},
+            series: [
+                {
+                    name: '销量',
+                    type: 'bar',
+                    data: [5, 20, 36, 10, 10, 20]
+                },
+                {
+                    name: '销量1',
+                    type: 'bar',
+                    data: [5, 7,88, 10, 8, 26]
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
