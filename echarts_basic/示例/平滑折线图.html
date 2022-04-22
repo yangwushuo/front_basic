@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+    <div id="main"></div>
+    <script src="../js/echarts.js"></script>
+    <script src="../theme/chalk.js"></script>
+    <script>
+      // 基于准备好的dom，初始化echarts实例
+      //参数: dom容器 主题 参数
+      var myChart = echarts.init(document.getElementById("main"), "dark", {
+        width:
+          document.documentElement.clientWidth || document.body.clientWidth,
+        height: "400px",
+      });
+      //如果窗口发生变化，调用回调函数
+      window.onresize = function () {
+        //除了直接调用 resize() 不含参数的形式之外，还可以指定宽度和高度，实现图表大小不等于容器大小的效果
+        //重设图标尺寸
+        myChart.resize({
+          width:
+            document.documentElement.clientWidth || document.body.clientWidth,
+          height: "400px",
+        });
+      };
+
+      let base = +new Date(1968, 9, 3);
+      let oneDay = 24 * 3600 * 1000;
+      let date1 = [];
+      let data1 = [Math.random() * 300];
+      let data2 = [Math.random() * 300];
+      for (let i = 1; i < 1000; i++) {
+        var now = new Date((base += oneDay));
+        date1.push(
+          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+        );
+        data1.push(Math.round((Math.random() - 0.5) * 2 + data1[i - 1]));
+        data2.push(Math.round((Math.random() - 0.5) * 4 + data2[i - 1]));
+      }
+
+      option = {
+        tooltip: {
+          trigger: "axis",
+          position: function (pt) {
+            return [pt[0], "10%"];
+          },
+        },
+        //标题设置
+        title: {
+          left: "center",
+          text: "成交量",
+        },
+        toolbox: {
+          feature: {
+            dataZoom: {
+              yAxisIndex: "none",
+            },
+            restore: {},
+            saveAsImage: {},
+          },
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          data: date1,
+        },
+        yAxis: {
+          type: "value",
+          boundaryGap: [0, "100%"],
+        },
+        dataZoom: [
+          {
+            type: "inside",
+            start: 0,
+            end: 9999,
+          },
+          {
+            start: 0,
+            end: 10,
+          },
+        ],
+        series: [
+          {
+            type: "line",
+            stack: "Total",
+            areaStyle: {},
+            emphasis: {
+              focus: "series",
+            },
+            // itemStyle: {
+            //   color: "rgb(55,10, 131)",
+            // },
+            data: data1,
+          },
+          {
+            type: "line",
+            stack: "Total",
+            areaStyle: {},
+            emphasis: {
+              focus: "series",
+            },
+            // itemStyle: {
+            //   color: "rgb(251, 70, 222)",
+            // },
+            data: data2,
+          },
+        ],
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option);
+    </script>
+  </body>
+</html>
