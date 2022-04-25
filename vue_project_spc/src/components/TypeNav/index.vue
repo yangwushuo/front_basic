@@ -60,6 +60,7 @@
 
 <script>
 import { mapState } from "vuex";
+import throttle from 'lodash/throttle';
 export default {
   name: "TypeNav",
   computed: {
@@ -74,10 +75,13 @@ export default {
   },
   methods: {
     //鼠标进入修改响应式数据currentIndex属性
-    changeIndex(index) {
-      //index 鼠标移上某一个一级分类的元素的索引
+    changeIndex: throttle(function(index){
+      // //index 鼠标移上某一个一级分类的元素的索引
+      // this.currentIndex = index;
+
+      //使用lodash提供得节流函数，来防止当鼠标不经意划过选项时，瞬间频繁调用方法,节流:一段时间只允许执行一次  防抖:只执行最后一次，只执行频繁调用得最后一次
       this.currentIndex = index;
-    },
+    },500),
     leaveIndex(){
       this.currentIndex = -1;
     }
