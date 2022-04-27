@@ -2,47 +2,66 @@
   <!-- 商品分类导航 -->
   <div class="type-nav">
     <div class="container">
-      <div @mouseleave="leaveIndex">
+      <div @mouseleave="leaveShow" @mouseenter="enterShow">
         <h2 class="all">全部商品分类</h2>
         <!-- 三级联动 -->
-        <div class="sort">
-          <div class="all-sort-list2">
-            <div
-              class="item"
-              v-for="(c1, index) in categoryList"
-              :key="c1.categoryId"
-              @mouseenter="changeIndex(index)"
-              :class="{ cur: index == currentIndex }"
-            >
-            
-              <h3>
-                <a href="">{{ c1.categoryName }}</a>
-              </h3>
-              <!-- 二级、三级分类 -->
-              <div class="item-list clearfix" :style="{display:currentIndex == index ? 'block':'none'}">
+        <transition name="sort">
+          <div class="sort" v-show="show">
+            <div class="all-sort-list2" @click="goSearch">
+              <div
+                class="item"
+                v-for="(c1, index) in categoryList"
+                :key="c1.categoryId"
+                @mouseenter="changeIndex(index)"
+                :class="{ cur: index == currentIndex }"
+              >
+                <h3>
+                  <a
+                    href="javascript:void(0)"
+                    :data-categoryName="c1.categoryName"
+                    :data-category1Id="c1.categoryId"
+                    >{{ c1.categoryName }}</a
+                  >
+                </h3>
+                <!-- 二级、三级分类 -->
                 <div
-                  class="subitem"
-                  v-for="(c2, index) in c1.categoryChild"
-                  :key="c2.categoryId"
+                  class="item-list clearfix"
+                  :style="{ display: currentIndex == index ? 'block' : 'none' }"
                 >
-                  <dl class="fore">
-                    <dt>
-                      <a href="">{{ c2.categoryName }}</a>
-                    </dt>
-                    <dd>
-                      <em
-                        v-for="(c3, index) in c2.categoryChild"
-                        :key="c3.categoryId"
-                      >
-                        <a href="">{{ c3.categoryName }}</a>
-                      </em>
-                    </dd>
-                  </dl>
+                  <div
+                    class="subitem"
+                    v-for="(c2, index) in c1.categoryChild"
+                    :key="c2.categoryId"
+                  >
+                    <dl class="fore">
+                      <dt>
+                        <a
+                          href="javascript:void(0)"
+                          :data-categoryName="c1.categoryName"
+                          :data-category2Id="c2.categoryId"
+                          >{{ c2.categoryName }}</a
+                        >
+                      </dt>
+                      <dd>
+                        <em
+                          v-for="(c3, index) in c2.categoryChild"
+                          :key="c3.categoryId"
+                        >
+                          <a
+                            href="javascript:void(0)"
+                            :data-categoryName="c1.categoryName"
+                            :data-category3Id="c3.categoryId"
+                            >{{ c3.categoryName }}</a
+                          >
+                        </em>
+                      </dd>
+                    </dl>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </transition>
       </div>
       <nav class="nav">
         <a href="###">服装城</a>
@@ -60,7 +79,7 @@
 
 <script>
 import { mapState } from "vuex";
-import throttle from 'lodash/throttle';
+import throttle from "lodash/throttle";
 export default {
   name: "TypeNav",
   computed: {
@@ -71,24 +90,71 @@ export default {
   data() {
     return {
       currentIndex: -1,
+      show: true,
     };
   },
   methods: {
     //鼠标进入修改响应式数据currentIndex属性
-    changeIndex: throttle(function(index){
+    changeIndex: throttle(function (index) {
       // //index 鼠标移上某一个一级分类的元素的索引
       // this.currentIndex = index;
 
       //使用lodash提供得节流函数，来防止当鼠标不经意划过选项时，瞬间频繁调用方法,节流:一段时间只允许执行一次  防抖:只执行最后一次，只执行频繁调用得最后一次
       this.currentIndex = index;
-    },500),
-    leaveIndex(){
+    }, 10),
+    leaveShow() {
       this.currentIndex = -1;
-    }
+      //判断当前路径是否是/home 如果是则还是展示，如果不是则进行关闭
+      if (this.$route.path != "/home") {
+        this.show = false;
+      }
+    },
+    enterShow() {
+      this.show = true;
+    },
+    goSearch(event) {
+      //最好的解决方案: 编程式导航+事件委派
+      //存在一些问题:事件委派，是把全部的子节点 的事件委派给父亲节点
+      //点击a标签的时候，才会进行路由跳转 怎么能确定点击的一定是a标签
+
+      //第一个问题:把子节点当中a标签，我加上自定义属性data-categoryName，其余子节点是没有的 //获取到当前触发这个事件的节点
+      let element = event.target;
+      //获取标签值
+      let { categoryname, category1id, category2id, category3id } =
+        element.dataset;
+      console.log(element.dataset);
+      //判断categoryname是否存在数据
+      if (categoryname) {
+        let location = {
+          name: "search",
+        };
+        let query = {
+          categoryName: categoryname,
+        };
+
+        if (category1id) {
+          query.category1Id = category1id;
+        } else if (category2id) {
+          query.category2Id = category2id;
+        } else {
+          query.category3Id = category3id;
+        }
+
+        location.query = query;
+
+        //携带当前路径中params参数
+        location.params = this.$route.params;
+
+        //发送请求
+        this.$router.push(location);
+      }
+    },
   },
   mounted() {
-    //调用vuex中的home模块中action，发送请求给服务器获取数据并存储
-    this.$store.dispatch("home/cateGoryList");
+    //判断当前是否是路劲/home如果是则三级菜单进行默认展示 如果不是则不展示
+    if (this.$route.path != "/home") {
+      this.show = false;
+    }
   },
 };
 </script>
@@ -208,6 +274,18 @@ export default {
           background-color: skyblue;
         }
       }
+    }
+
+    .sort-enter,.sort-leave-to{
+      height: 0px;
+    }
+
+    .sort-enter-to,.sort-leave{
+      height: 461px;
+    }
+
+    .sort-enter-active,.sort-leave-active{
+      transition: all 0.2s linear;
     }
   }
 }

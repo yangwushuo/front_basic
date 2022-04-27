@@ -13,7 +13,7 @@ const requests = axios.create({
   //基础路径，发请求的时候，路径前面会添加基本路径
   baseURL: '/api',
   //请求超时
-  timeout: 5000,
+  timeout: 50000,
 });
 
 //请求拦截器: 发送请求之前进行拦截，进行处理操作，再发送
@@ -30,7 +30,6 @@ requests.interceptors.request.use((config) => {
 requests.interceptors.response.use(
   (res) => {
     //响应成功调用此方法
-
     //接收响应时让进度条结束
     nprogress.done();
 
@@ -38,6 +37,7 @@ requests.interceptors.response.use(
   },
   (error) => {
     //响应失败调用此方法
+    console.log("request err:",error);
     return Promise.reject(new Error('faile'));
   }
 )

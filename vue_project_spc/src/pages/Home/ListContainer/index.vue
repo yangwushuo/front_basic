@@ -4,28 +4,7 @@
     <div class="sortList clearfix">
       <div class="center">
         <!--banner轮播-->
-        <div class="swiper-container" id="mySwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="./images/banner1.jpg" />
-            </div>
-            <!-- <div class="swiper-slide">
-              <img src="./images/banner2.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="./images/banner3.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="./images/banner4.jpg" />
-            </div> -->
-          </div>
-          <!-- 如果需要分页器 -->
-          <div class="swiper-pagination"></div>
-
-          <!-- 如果需要导航按钮 -->
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
-        </div>
+        <Carousel :list='bannerList'/>
       </div>
       <div class="right">
         <div class="news">
@@ -101,9 +80,23 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "ListContainer",
-}
+  computed: {
+    ...mapState("home", {
+      bannerList: "bannerList",
+    }),
+  },
+
+  mounted() {
+    //使用vuex获取轮播图数据
+    this.$store.dispatch("home/getBannerList");
+    //在new Swpier实例之前，页面中结构必须的有
+    //因为dispatch当中涉及到异步语句，导致v-for遍历的时候结构还没有完全因此不行
+    //为什么swiper实例在mounted当中直接书写不可以，因为结构还没有完成
+  },
+};
 </script>
 
 <style lang="less" scoped>
@@ -177,7 +170,7 @@ export default {
           width: 25%;
 
           .list-item {
-            background-image: url('@/assets/icons.png');
+            background-image: url("@/assets/icons.png");
             width: 61px;
             height: 40px;
             display: block;

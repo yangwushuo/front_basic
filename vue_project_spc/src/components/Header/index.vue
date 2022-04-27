@@ -58,8 +58,19 @@ export default {
   },
   methods: {
     goSearch(){
+
+      let location = {
+        name: 'search',
+        params: {
+          keyWord: this.keyWord
+        },
+        //判断当前路径中是否含有query参数，如果有则携带过去
+        query: this.$route.query
+      }
+
       //使用编程式路由跳转到搜索 进行传参
-      this.$router.push(`/search/${this.keyWord}`)
+      this.$router.push(location);
+
     }
   },
 };
