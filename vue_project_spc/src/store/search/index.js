@@ -28,7 +28,6 @@ const getters = {
     return state.searchList.attrsList || [];
   },
   trademarkList(state){
-    console.log(state.searchList.trademarkList);
     return state.searchList.trademarkList || [];
   }
 };

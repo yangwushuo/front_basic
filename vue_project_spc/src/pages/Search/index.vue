@@ -11,10 +11,10 @@
             </li>
           </ul>
           <ul class="fl sui-tag">
-            <li class="with-x">手机</li>
-            <li class="with-x">iphone<i>×</i></li>
-            <li class="with-x">华为<i>×</i></li>
-            <li class="with-x">OPPO<i>×</i></li>
+            <li class="with-x" v-if="searchParams.categoryName">
+              {{ searchParams.categoryName
+              }}<i @click="removeCategoryName">×</i>
+            </li>
           </ul>
         </div>
 
@@ -160,15 +160,46 @@ export default {
     };
   },
   beforeMount() {
-    Object.assign(this.searchParams, this.$route.query,this.$route.params)
-    console.log(this.searchParams);
+    Object.assign(this.searchParams, this.$route.query, this.$route.params);
   },
   mounted() {
     this.getData();
   },
+  watch: {
+    //监听路由的信息是否发生变化，如果发生变化，再次发起请求
+    $route: {
+      handler(newValue, oldValue) {
+        console.log("监测到路由发生改变");
+        //再次发请求之前整理带给服务器参数
+        Object.assign(this.searchParams, this.$route.query, this.$route.params);
+        //再次发ajax请求
+        this.getData();
+        //每次请求完毕，应该相应的，1，2，3级分类的id置空，让他接收下一次的相应，1，2，3id
+        this.searchParams.category1Id = "";
+        this.searchParams.category2Id = "";
+        this.searchParams.category3Id = "";
+      },
+    },
+  },
   methods: {
     getData() {
       this.$store.dispatch("search/getSearchList", this.searchParams);
+    },
+    removeCategoryName() {
+      this.searchParams.category1Id = undefined;
+      this.searchParams.category2Id = undefined;
+      this.searchParams.category3Id = undefined;
+      this.searchParams.categoryName = undefined;
+      //重置路由
+      if(this.$route.params){
+        console.log(this.$route.params);
+        this.$router.push({
+          name:'search',
+          params:this.$route.params
+        })
+      }else{
+        this.$router.push({name:'search'})
+      }
     },
   },
 };

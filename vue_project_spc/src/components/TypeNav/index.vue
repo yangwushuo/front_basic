@@ -37,7 +37,7 @@
                       <dt>
                         <a
                           href="javascript:void(0)"
-                          :data-categoryName="c1.categoryName"
+                          :data-categoryName="c2.categoryName"
                           :data-category2Id="c2.categoryId"
                           >{{ c2.categoryName }}</a
                         >
@@ -49,7 +49,7 @@
                         >
                           <a
                             href="javascript:void(0)"
-                            :data-categoryName="c1.categoryName"
+                            :data-categoryName="c3.categoryName"
                             :data-category3Id="c3.categoryId"
                             >{{ c3.categoryName }}</a
                           >
@@ -122,7 +122,6 @@ export default {
       //获取标签值
       let { categoryname, category1id, category2id, category3id } =
         element.dataset;
-      console.log(element.dataset);
       //判断categoryname是否存在数据
       if (categoryname) {
         let location = {
@@ -144,7 +143,6 @@ export default {
 
         //携带当前路径中params参数
         location.params = this.$route.params;
-
         //发送请求
         this.$router.push(location);
       }
