@@ -15,11 +15,28 @@
               {{ searchParams.categoryName
               }}<i @click="removeCategoryName">×</i>
             </li>
+            <!-- 关键字的面包屑 -->
+            <li class="with-x" v-if="searchParams.keyword">
+              {{ searchParams.keyword }}<i @click="removeKeyword">×</i>
+            </li>
+            <!-- 品牌的面包屑 -->
+            <li class="with-x" v-if="searchParams.trademark">
+              {{ searchParams.trademark.split(":")[1]
+              }}<i @click="removeTradeMark">×</i>
+            </li>
+            <!--平台的售卖的属性值展示 -->
+            <li
+              class="with-x"
+              v-for="(attrValue, index) in searchParams.props"
+              :key="index"
+            >
+              {{ attrValue.split(":")[1] }}<i @click="removeAttr(index)">×</i>
+            </li>
           </ul>
         </div>
 
         <!--selector-->
-        <SearchSelector />
+        <SearchSelector @trademarkInfo="trademarkInfo" @attrInfo="attrInfo" />
 
         <!--details-->
         <div class="details clearfix">
@@ -172,6 +189,7 @@ export default {
         console.log("监测到路由发生改变");
         //再次发请求之前整理带给服务器参数
         Object.assign(this.searchParams, this.$route.query, this.$route.params);
+        console.log(this.searchParams);
         //再次发ajax请求
         this.getData();
         //每次请求完毕，应该相应的，1，2，3级分类的id置空，让他接收下一次的相应，1，2，3id
@@ -191,15 +209,46 @@ export default {
       this.searchParams.category3Id = undefined;
       this.searchParams.categoryName = undefined;
       //重置路由
-      if(this.$route.params){
-        console.log(this.$route.params);
+      if (this.$route.params) {
         this.$router.push({
-          name:'search',
-          params:this.$route.params
-        })
-      }else{
-        this.$router.push({name:'search'})
+          name: "search",
+          params: this.$route.params,
+        });
+      } else {
+        this.$router.push({ name: "search" });
       }
+    },
+    removeKeyword() {
+      this.searchParams.keyword = undefined;
+      //使用总线让header输入框置空
+      this.$bus.$emit("clearKeyword");
+      if (this.$route.query) {
+        this.$router.push({
+          name: "search",
+          query: this.$route.query,
+        });
+      } else {
+        this.$router.push({ name: "search" });
+      }
+    },
+    trademarkInfo(trademark) {
+      this.searchParams.trademark = `${trademark.tmId}:${trademark.tmName}`;
+      this.getData();
+    },
+    removeTradeMark() {
+      this.searchParams.trademark = undefined;
+      this.getData();
+    },  
+    attrInfo(attr, attrValue) {
+      let props = `${attr.attrId}:${attrValue}:${attr.attrName}`;
+      if (this.searchParams.props.indexOf(props) == -1) {
+        this.searchParams.props.push(props);
+        this.getData();
+      }
+    },
+    removeAttr(index) {
+      this.searchParams.props.splice(index, 1);
+      this.getData();
     },
   },
 };

@@ -88,7 +88,7 @@ export default new VueRouter({
     {
       name: 'search',
       //添加param添加问号代表可传可不传
-      path: '/search/:keyWord?',
+      path: '/search/:keyword?',
       component: Search,
       meta:{
         show: true,

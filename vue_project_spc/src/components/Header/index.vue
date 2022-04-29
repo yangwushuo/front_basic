@@ -37,7 +37,7 @@
             type="text"
             id="autocomplete"
             class="input-error input-xxlarge"
-            v-model="keyWord"
+            v-model="keyword"
           />
           <button class="sui-btn btn-xlarge btn-danger" type="button" @click="goSearch">
             搜索
@@ -53,7 +53,7 @@ export default {
   name: 'Header',
   data() {
     return {
-      keyWord: ''
+      keyword: ''
     }
   },
   methods: {
@@ -62,7 +62,7 @@ export default {
       let location = {
         name: 'search',
         params: {
-          keyWord: this.keyWord
+          keyword: this.keyword
         },
         //判断当前路径中是否含有query参数，如果有则携带过去
         query: this.$route.query
@@ -72,6 +72,13 @@ export default {
       this.$router.push(location);
 
     }
+  },
+  mounted() {
+    //总线注册事件
+    this.$bus.$on('clearKeyword',()=>{
+      console.log('clearKeyword事件被调用');
+      this.keyword = "";
+    })
   },
 };
 </script>
