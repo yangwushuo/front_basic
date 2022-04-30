@@ -43,23 +43,27 @@
           <div class="sui-navbar">
             <div class="navbar-inner filter">
               <ul class="sui-nav">
-                <li class="active">
-                  <a href="#">综合</a>
+                <li :class="{ active: isOne }" @click="changeOrder('1')">
+                  <a href="#"
+                    >综合<span
+                      v-show="isOne"
+                      :class="{
+                        'fa fa-angle-up': isAsc,
+                        'fa fa-angle-down': isDesc,
+                      }"
+                    ></span
+                  ></a>
                 </li>
-                <li>
-                  <a href="#">销量</a>
-                </li>
-                <li>
-                  <a href="#">新品</a>
-                </li>
-                <li>
-                  <a href="#">评价</a>
-                </li>
-                <li>
-                  <a href="#">价格⬆</a>
-                </li>
-                <li>
-                  <a href="#">价格⬇</a>
+                <li :class="{ active: isTwo }" @click="changeOrder('2')">
+                  <a href="#"
+                    >价格<span
+                      v-show="isTwo"
+                      :class="{
+                        'fa fa-angle-up': isAsc,
+                        'fa fa-angle-down': isDesc,
+                      }"
+                    ></span
+                  ></a>
                 </li>
               </ul>
             </div>
@@ -73,9 +77,9 @@
               >
                 <div class="list-wrap">
                   <div class="p-img">
-                    <a href="item.html" target="_blank"
+                    <router-link :to="`/detail/${good.id}`"
                       ><img :src="good.defaultImg"
-                    /></a>
+                    /></router-link>
                   </div>
                   <div class="price">
                     <strong>
@@ -106,35 +110,7 @@
               </li>
             </ul>
           </div>
-          <div class="fr page">
-            <div class="sui-pagination clearfix">
-              <ul>
-                <li class="prev disabled">
-                  <a href="#">«上一页</a>
-                </li>
-                <li class="active">
-                  <a href="#">1</a>
-                </li>
-                <li>
-                  <a href="#">2</a>
-                </li>
-                <li>
-                  <a href="#">3</a>
-                </li>
-                <li>
-                  <a href="#">4</a>
-                </li>
-                <li>
-                  <a href="#">5</a>
-                </li>
-                <li class="dotted"><span>...</span></li>
-                <li class="next">
-                  <a href="#">下一页»</a>
-                </li>
-              </ul>
-              <div><span>共10页&nbsp;</span></div>
-            </div>
-          </div>
+          <Pagination  :pageNo="searchList.pageNo" :pageSize="searchList.pageSize" :total="searchList.total" :continues="5" @getPageNo="getPageNo"/>
         </div>
       </div>
     </div>
@@ -143,7 +119,7 @@
 
 <script>
 import SearchSelector from "./SearchSelector/SearchSelector";
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 export default {
   name: "Search",
   components: {
@@ -151,6 +127,19 @@ export default {
   },
   computed: {
     ...mapGetters("search", ["goodsList", "attrsList", "trademarkList"]),
+    ...mapState("search", ["searchList"]),
+    isOne() {
+      return this.searchParams.order.indexOf("1") != -1;
+    },
+    isTwo() {
+      return this.searchParams.order.indexOf("2") != -1;
+    },
+    isAsc() {
+      return this.searchParams.order.indexOf("asc") != -1;
+    },
+    isDesc() {
+      return this.searchParams.order.indexOf("desc") != -1;
+    },
   },
   data() {
     return {
@@ -164,7 +153,7 @@ export default {
         //搜索的关键字
         keyword: "",
         //排序:初始状态应该是综合且降序
-        order: "1:desc",
+        order: "1:asc",
         //第几页
         pageNo: 1,
         //每一页展示条数
@@ -238,7 +227,7 @@ export default {
     removeTradeMark() {
       this.searchParams.trademark = undefined;
       this.getData();
-    },  
+    },
     attrInfo(attr, attrValue) {
       let props = `${attr.attrId}:${attrValue}:${attr.attrName}`;
       if (this.searchParams.props.indexOf(props) == -1) {
@@ -248,6 +237,25 @@ export default {
     },
     removeAttr(index) {
       this.searchParams.props.splice(index, 1);
+      this.getData();
+    },
+    changeOrder(flag) {
+      let originOrder = this.searchParams.order;
+      let orginsFlag = originOrder.split(":")[0];
+      let originSort = originOrder.split(":")[1];
+      let newOrder = "";
+      //判断的是多次点击的是不是同一个按钮
+      if (flag == orginsFlag) {
+        newOrder = `${orginsFlag}:${originSort == "desc" ? "asc" : "desc"}`;
+      } else {
+        //点击不是同一个按钮
+        newOrder = `${flag}:${"desc"}`;
+      }
+      this.searchParams.order = newOrder;
+      this.getData();
+    },
+    getPageNo(pageNo) {
+      this.searchParams.pageNo = pageNo;
       this.getData();
     },
   },

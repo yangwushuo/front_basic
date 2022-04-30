@@ -5,11 +5,7 @@ import Vue from 'vue'
 //安装路由插件
 Vue.use(VueRouter)
 
-//配置组件
-import Home from '@/pages/Home'
-import Login from '@/pages/Login'
-import Register from '@/pages/Register'
-import Search from '@/pages/Search'
+import routes from './routes'
 
 //先把VueRouter原型对象的push与replace保存一份
 let originPush = VueRouter.prototype.push;
@@ -56,48 +52,12 @@ VueRouter.prototype.replace = function(location, resolve, reject){
 
 //暴露路由出去
 export default new VueRouter({
-  routes:[
-    //home路由
-    {
-      name: 'home',
-      path: '/home',
-      component: Home,
-      meta:{
-        show: true,
-      },
-    },
-    //login路由
-    {
-      name: 'login',
-      path: '/login',
-      component: Login,
-      meta:{
-        show: false,
-      },
-    },
-    //register路由
-    {
-      name: 'register',
-      path: '/register',
-      component: Register,
-      meta:{
-        show: false,
-      },
-    },
-    //Search路由
-    {
-      name: 'search',
-      //添加param添加问号代表可传可不传
-      path: '/search/:keyword?',
-      component: Search,
-      meta:{
-        show: true,
-      },
-    },
-    //重定向，在项目跑起来的时候，访问/
-    {
-      path: '*',
-      redirect: '/home'
+  routes,
+  //滚动行为， 跳转路由后固定到某一个位置
+  scrollBehavior(to, from, savedPosition){
+    //返回的这个y=0 代表的滚动条的最上方
+    return {
+      y: 0 
     }
-  ]
+  }
 })

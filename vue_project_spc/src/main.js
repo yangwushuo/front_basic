@@ -12,6 +12,9 @@ Vue.component(TypeNav.name, TypeNav)
 //轮播图
 import Carousel from '@/components/Carousel'
 Vue.component(Carousel.name,Carousel)
+//分页器
+import Pagination from '@/components/Pagination';
+Vue.component(Pagination.name,Pagination)
 
 //使用vuex 
 import store from '@/store/index';

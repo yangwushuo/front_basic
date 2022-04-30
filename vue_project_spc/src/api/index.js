@@ -34,3 +34,11 @@ export const reqGetSearchInfo = (params) => {
   })
 }
 
+//detail
+export const reqGoodsInfo = (skuId) => {
+  return requests({
+    url: `/item/${skuId}`,
+    method: 'get'
+  })
+}
+
