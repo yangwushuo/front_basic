@@ -21,7 +21,16 @@ const state = {
 };
 //getters 理解为计算属性
 const getters = {
-
+  categoryView(state){
+    return state.goodInfo.categoryView || {};
+  },
+  skuInfo(state){
+    return state.goodInfo.skuInfo || {};
+  },
+  //产品售卖属性的简化
+  spuSaleAttrList(state) {
+    return state.goodInfo.spuSaleAttrList || [];
+  },
 };
 
 export default {

@@ -79,7 +79,7 @@ export default {
           start = totalPage - continues + 1;
         }
       }
-      return { start, end };
+      return start? { start, end }: {start:0, end:0};
     },
   },
 };
