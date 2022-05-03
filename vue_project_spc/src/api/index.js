@@ -42,3 +42,18 @@ export const reqGoodsInfo = (skuId) => {
   })
 }
 
+//发送添加购物车 并获取数据
+export const reqAddOrUpdateShopCart = (skuId, skuNum) => {
+  return requests({
+    url: `/cart/addToCart/${skuId}/${skuNum}`,
+    method: 'post'
+  })
+} 
+
+//获取购物车列表
+export const reqCartList= () => {
+  return requests({
+    url: `/cart/cartList`,
+    method: 'get'
+  })
+}

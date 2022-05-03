@@ -5,6 +5,8 @@ import Login from '@/pages/Login'
 import Register from '@/pages/Register'
 import Search from '@/pages/Search'
 import Detail from '@/pages/Detail'
+import AddCartSuccess from '@/pages/AddCartSuccess'
+import ShopCart from '@/pages/ShopCart'
 
 export default [
   //home路由
@@ -12,6 +14,25 @@ export default [
     name: 'home',
     path: '/home',
     component: Home,
+    meta:{
+      //是否展示下框
+      show: true,
+    },
+  },
+  //购物车
+  {
+    name: 'shopcart',
+    path: '/shopcart',
+    component: ShopCart,
+    meta:{
+      show: true,
+    },
+  },
+  //购物详情页
+  {
+    name: 'addcartsuccess',
+    path: '/addcartsuccess',
+    component: AddCartSuccess,
     meta:{
       show: true,
     },

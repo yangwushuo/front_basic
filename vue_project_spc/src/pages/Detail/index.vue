@@ -92,7 +92,12 @@
                     spuSaleAttrValue, _
                   ) in spuSaleAttr.spuSaleAttrValueList"
                   :key="spuSaleAttrValue.id"
-                  @click="changeActive(spuSaleAttrValue,spuSaleAttr.spuSaleAttrValueList)"
+                  @click="
+                    changeActive(
+                      spuSaleAttrValue,
+                      spuSaleAttr.spuSaleAttrValueList
+                    )
+                  "
                 >
                   {{ spuSaleAttrValue.saleAttrValueName }}
                 </dd>
@@ -100,12 +105,22 @@
             </div>
             <div class="cartWrap">
               <div class="controls">
-                <input autocomplete="off" class="itxt" />
-                <a href="javascript:" class="plus">+</a>
-                <a href="javascript:" class="mins">-</a>
+                <input
+                  autocomplete="off"
+                  class="itxt"
+                  v-model="skuNum"
+                  @change="changeSkuNum"
+                />
+                <a href="javascript:" class="plus" @click="skuNum++">+</a>
+                <a
+                  href="javascript:"
+                  class="mins"
+                  @click="skuNum > 1 ? skuNum-- : (skuNum = 1)"
+                  >-</a
+                >
               </div>
               <div class="add">
-                <a href="javascript:">加入购物车</a>
+                <a href="javascript:" @click="addShopcar">加入购物车</a>
               </div>
             </div>
           </div>
@@ -350,6 +365,11 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "Detail",
+  data() {
+    return {
+      skuNum: 1,
+    };
+  },
   components: {
     ImageList,
     Zoom,
@@ -364,12 +384,48 @@ export default {
     this.$store.dispatch("detail/getGoodInfo", this.$route.params.skuid);
   },
   methods: {
-    changeActive(spuSaleAttrValue,spuSaleAttrValueList){
-      spuSaleAttrValueList.forEach(item => {
+    changeActive(spuSaleAttrValue, spuSaleAttrValueList) {
+      spuSaleAttrValueList.forEach((item) => {
         item.isChecked = 0;
       });
       spuSaleAttrValue.isChecked = 1;
-    }
+    },
+    changeSkuNum(event) {
+      //获取输入框值
+      //如果是字符串*1就是非数值NaN,如果是数值*1还是数值
+      let value = event.target.value * 1;
+      //判断非数值 或者 小于1得负数
+      if (isNaN(value) || value < 1) {
+        this.skuNum = 1;
+      } else {
+        //判断整数或者小数
+        this.skuNum = parseInt(value);
+      }
+    },
+    //添加购物车
+    async addShopcar() {
+      //1发送请求给服务器，进行添加
+      //服务器写入数据成功，并没有返回其他得数据，只是返回code=200，代表添加成功
+      //因为服务器没有返回其余数据，因此不需要三连环存储
+      try {
+        await this.$store.dispatch("detail/addOrUpdateShopCart", {
+          skuId: this.$route.params.skuid,
+          skuNum: this.skuNum,
+        });
+        //添加购物车成功之后，跳转路由
+        this.$router.push({
+          name: 'addcartsuccess',
+          query: {
+            skuNum: this.skuNum,
+          }
+        });
+        //使用会话存储当前选中的物品
+        sessionStorage.setItem('SKUINFO',JSON.stringify(this.skuInfo));
+      } catch (error) {
+        //添加购物车失败
+        alert(error.message);
+      }
+    },
   },
 };
 </script>
