@@ -17,7 +17,12 @@
           :key="cart.id"
         >
           <li class="cart-list-con1">
-            <input type="checkbox" name="chk_list" :checked="cart.isChecked" />
+            <input
+              type="checkbox"
+              name="chk_list"
+              :checked="cart.isChecked"
+              @change="updateChecked(cart, $event)"
+            />
           </li>
           <li class="cart-list-con2">
             <img :src="cart.imgUrl" />
@@ -54,7 +59,9 @@
             <span class="sum">{{ cart.skuNum * cart.skuPrice }}</span>
           </li>
           <li class="cart-list-con7">
-            <a href="#none" class="sindelet">删除</a>
+            <a href="#none" class="sindelet" @click="deleteCartById(cart.skuId)"
+              >删除</a
+            >
             <br />
             <a href="#none">移到收藏</a>
           </li>
@@ -63,11 +70,16 @@
     </div>
     <div class="cart-tool">
       <div class="select-all">
-        <input class="chooseAll" type="checkbox" :checked="isAllChecked" />
+        <input
+          class="chooseAll"
+          type="checkbox"
+          :checked="isAllChecked"
+          @change="updateAllCartChecked"
+        />
         <span>全选</span>
       </div>
       <div class="option">
-        <a href="#none">删除选中的商品</a>
+        <a href="#none" @click="deleteAllCheckedCart">删除选中的商品</a>
         <a href="#none">移到我的关注</a>
         <a href="#none">清除下柜商品</a>
       </div>
@@ -87,25 +99,26 @@
 
 <script>
 import { mapGetters } from "vuex";
+import throttle from "lodash/throttle";
 export default {
   name: "ShopCart",
   methods: {
     getData() {
       this.$store.dispatch("shopcart/getCartList");
     },
-    async handler(type, disNum, cart) {
+    //使用throttle的节流防止用户操作过快
+    handler: throttle(async function (type, disNum, cart) {
       //type 为了区分元素
       // console.log(type, disNum, cart);
-      //新增=新数量-旧数量  为0则不变 
+      //新增=新数量-旧数量  为0则不变
       if (type == "add") {
-
       } else if (type == "mins") {
         disNum = cart.skuNum > 1 ? -1 : 0;
       } else {
         //非数值和负数值情况
-        if(isNaN(disNum) || disNum < 1){
+        if (isNaN(disNum) || disNum < 1) {
           disNum = 0;
-        }else{
+        } else {
           //小数情况
           disNum = parseInt(disNum) - cart.skuNum;
         }
@@ -124,8 +137,55 @@ export default {
       } catch (error) {
         console.log(error.message);
       }
+    }, 500),
+    //购物车删除商品
+    async deleteCartById(skuId) {
+      try {
+        //发送删除请求
+        await this.$store.dispatch("shopcart/deleteCartListById", skuId);
+        //重新获取新数据
+        this.getData();
+      } catch (error) {
+        console.log(error.message);
+      }
+    },
+    //购物车修改商品状态
+    async updateChecked(cart, event) {
+      try {
+        //发送删除请求
+        await this.$store.dispatch("shopcart/updateCheckedById", {
+          skuId: cart.skuId,
+          isChecked: event.target.checked ? 1 : 0,
+        });
+        //重新获取新数据
+        this.getData();
+      } catch (error) {
+        console.log(error.message);
+      }
+    },
+    //删除所有选中的商品
+    async deleteAllCheckedCart() {
+      try {
+        //发送删除请求
+        await this.$store.dispatch("shopcart/deleteAllCheckedCart");
+        //重新获取新数据
+        this.getData();
+      } catch (error) {
+        console.log(error.message);
+      }
+    },
+    //全选变换
+    async updateAllCartChecked(event) {
+      let isChecked = event.target.checked ? "1" : "0";
 
-      
+      try {
+        //派发action
+        await this.$store.dispatch("shopcart/updateAllCartChecked", isChecked);
+        //重新获取新数据
+        this.getData();
+      } catch (error) {
+        console.log(error.message);
+      }
     },
   },
   computed: {
@@ -143,9 +203,19 @@ export default {
     },
     //全选功能
     isAllChecked() {
-      return this.cartInfoList.every((cart) => {
-        cart.isChecked == 1;
-      });
+      let allChecked = true;
+
+      if (!this.cartInfoList.length) {
+        return false;
+      } else {
+        for (let cart of this.cartInfoList) {
+          if (!cart.isChecked) {
+            allChecked = false;
+          }
+        }
+      }
+
+      return allChecked;
     },
   },
   mounted() {

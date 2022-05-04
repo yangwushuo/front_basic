@@ -57,3 +57,40 @@ export const reqCartList= () => {
     method: 'get'
   })
 }
+
+//删除购物车
+export const reqDeleteCartById = (skuId) => {
+  return requests({
+    url: `/cart/deleteCart/${skuId}`,
+    method: 'delete'
+  })
+}
+
+//修改购物车商品状态
+export const reqUpdateCheckedById = (skuId, isChecked) => {
+  return requests({
+    url: `/cart/checkCart/${skuId}/${isChecked}`,
+    method: 'get'
+  })
+}
+
+//获取验证码
+export const reqGetCode = (phone) => {
+  return requests({
+    url: `/user/passport/sendCode/${phone}`,
+    method: 'get'
+  })
+}
+
+//用户注册
+export const reqUserRegister = (data) => {
+  return requests({
+    url: `/user/passport/register`,
+    data,
+    method: 'post'
+  })
+}
+
+
+
+
