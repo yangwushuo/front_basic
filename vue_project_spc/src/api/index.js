@@ -1,6 +1,7 @@
 //api统一管理
 import requests from './request'
 import mockRequest from './mockAjax'
+import { method } from 'lodash';
 
 export const reqCategoryList = () => {
   return requests({
@@ -88,6 +89,31 @@ export const reqUserRegister = (data) => {
     url: `/user/passport/register`,
     data,
     method: 'post'
+  })
+}
+
+//用户登录
+export const reqUserLogin = (data) => {
+  return requests({
+    url: `/user/passport/login`,
+    data,
+    method: 'post',
+  })
+}
+
+//获取用户信息
+export const reqUserInfo = () => {
+  return requests({
+    url: '/user/passport/auth/getUserInfo',
+    method: 'get',
+  })
+}
+
+//退出登录
+export const reqLogout = () => {
+  return requests({
+    url: '/user/passport/logout',
+    method: 'get',
   })
 }
 

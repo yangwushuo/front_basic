@@ -20,7 +20,7 @@ const requests = axios.create({
 
 //请求拦截器: 发送请求之前进行拦截，进行处理操作，再发送
 requests.interceptors.request.use((config) => {
-  //config 参数包含当前请求的一些配置 比如: header
+  //config 参数包含当前请求的一些配置 比如: hea der
 
   //发送请求时让进度条开始
   nprogress.start();
@@ -29,6 +29,12 @@ requests.interceptors.request.use((config) => {
   let uuid_token = store.state.detail.uuid_token;
   if(uuid_token){
     config.headers.userTempId = uuid_token;
+  }
+
+  //添加token
+  let token = store.state.user.token;
+  if(token){
+    config.headers.token = token;
   }
 
   return config;
