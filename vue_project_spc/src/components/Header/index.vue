@@ -82,7 +82,7 @@ export default {
         //派发退出登录请求
         await this.$store.dispatch('user/userLogout');
         //跳转到主页
-        this.$$router.replace('/home');
+        this.$router.replace('/home');
       } catch (error) {
         console.log(error.message);
       }

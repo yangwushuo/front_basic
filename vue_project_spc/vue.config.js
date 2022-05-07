@@ -8,5 +8,6 @@ module.exports = defineConfig({
         target: 'http://gmall-h5-api.atguigu.cn',
       },
     },  
-  },
+  },  
+  
 })

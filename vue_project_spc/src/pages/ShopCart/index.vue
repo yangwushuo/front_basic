@@ -90,7 +90,7 @@
           <i class="summoney">{{ totalPrice }}</i>
         </div>
         <div class="sumbtn">
-          <a class="sum-btn" href="###" target="_blank">结算</a>
+          <a class="sum-btn" @click="goTrade">结算</a>
         </div>
       </div>
     </div>
@@ -187,6 +187,10 @@ export default {
         console.log(error.message);
       }
     },
+    //转到交易界面
+    goTrade(){  
+      this.$router.push('/trade');
+    }
   },
   computed: {
     ...mapGetters("shopcart", ["cartList"]),

@@ -7,6 +7,8 @@ import Search from '@/pages/Search'
 import Detail from '@/pages/Detail'
 import AddCartSuccess from '@/pages/AddCartSuccess'
 import ShopCart from '@/pages/ShopCart'
+import Trade from '@/pages/Trade'
+import Pay from '@/pages/Pay'
 
 export default [
   //home路由
@@ -24,6 +26,24 @@ export default [
     name: 'shopcart',
     path: '/shopcart',
     component: ShopCart,
+    meta:{
+      show: true,
+    },
+  },
+  //支付
+  {
+    name: 'pay',
+    path: '/pay',
+    component: Pay,
+    meta:{
+      show: true,
+    },
+  },
+  //交易
+  {
+    name: 'trade',
+    path: '/trade',
+    component: Trade,
     meta:{
       show: true,
     },

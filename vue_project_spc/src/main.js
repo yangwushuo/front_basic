@@ -15,7 +15,12 @@ Vue.component(Carousel.name,Carousel)
 //分页器
 import Pagination from '@/components/Pagination';
 Vue.component(Pagination.name,Pagination)
-
+//element-ui
+import {Button,MessageBox} from 'element-ui';
+Vue.component(Button.name, Button)
+//组件注册在原型上
+Vue.prototype.$msgbox = MessageBox;
+Vue.prototype.$alert = MessageBox.alert;
 //使用vuex 
 import store from '@/store/index';
 //使用mock
@@ -24,11 +29,15 @@ import '@/mock/mockServe';
 //引入swiper样式
 import 'swiper/css/swiper.css';
 
+//引入api
+import * as API from '@/api/index'
+
 new Vue({
   render: h => h(App),  
   //配置全局事件总线
   beforeCreate(){
     Vue.prototype.$bus = this;
+    Vue.prototype.$API = API;
   },
   //注册路由信息: 当这里书写router的时候，组件身上都用有$route $router属性
   router,

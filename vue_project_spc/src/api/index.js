@@ -117,6 +117,39 @@ export const reqLogout = () => {
   })
 }
 
+//获取用户地址信息
+export const reqAddressInfo = () => {
+  return requests({
+    url: '/user/userAddress/auth/findUserAddressList',
+    method: 'get',
+  })
+}
+
+//获取商品清单
+export const reqOrderInfo = () => {
+  return requests({
+    url: '/order/auth/trade',
+    method: 'get',
+  })
+}
+
+//提交订单
+export const reqSubmitOrder = (tradeNo, data) => {
+  return requests({
+    url: `/order/auth/submitOrder?tradeNo=${tradeNo}`,
+    data,
+    method: 'post',
+  })
+}
+
+//获取支付订单信息
+export const reqPayInfo = (orderId) => {
+  return requests({
+    url: `/payment/weixin/createNative/${orderId}`,
+    method: 'get',
+  })
+}
+
 
 
 
