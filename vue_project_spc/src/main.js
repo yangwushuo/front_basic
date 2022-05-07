@@ -21,6 +21,7 @@ Vue.component(Button.name, Button)
 //组件注册在原型上
 Vue.prototype.$msgbox = MessageBox;
 Vue.prototype.$alert = MessageBox.alert;
+Vue.prototype.$confirm = MessageBox.confirm;
 //使用vuex 
 import store from '@/store/index';
 //使用mock
