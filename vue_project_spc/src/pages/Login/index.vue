@@ -100,9 +100,11 @@ export default {
           await this.$store.dispatch("user/getUserInfo");
         }
         //登录成功进行路由跳转
-        this.$router.push("/home");
+        //获取路劲中query是否有指定跳转的路由
+        let toPath = this.$route.query.redirect || '/home';
+        this.$router.push(toPath);
       } catch (error) {
-        console.log(eror.message);
+        console.log(error.message);
       }
     },
   },

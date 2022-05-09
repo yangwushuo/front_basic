@@ -17,7 +17,7 @@
           </p>
         </div>
         <div class="typeList">
-          <a href="###">我的订单</a>
+          <a href="###" @click="goMyOrder">我的订单</a>
           <a href="###">我的购物车</a>
           <a href="###">我的尚品汇</a>
           <a href="###">尚品汇会员</a>
@@ -75,6 +75,9 @@ export default {
       //使用编程式路由跳转到搜索 进行传参
       this.$router.push(location);
 
+    },
+    goMyOrder(){
+      this.$router.push('/center');
     },
     //退出登录
     async logout(){
