@@ -1,18 +1,18 @@
-//组件导入
-import Home from '@/pages/Home'
-import Login from '@/pages/Login'
-import Register from '@/pages/Register'
-import Search from '@/pages/Search'
-import Detail from '@/pages/Detail'
-import AddCartSuccess from '@/pages/AddCartSuccess'
-import ShopCart from '@/pages/ShopCart'
-import Trade from '@/pages/Trade'
-import Pay from '@/pages/Pay'
-import PaySuccess from '@/pages/PaySuccess'
-import Center from '@/pages/Center'
+//组件导入 使用路由懒加载
+const Home = () => import('@/pages/Home')
+const Login = () => import('@/pages/Login')
+const Register = () => import('@/pages/Register')
+const Search = () => import('@/pages/Search')
+const Detail = () => import('@/pages/Detail')
+const AddCartSuccess = () => import('@/pages/AddCartSuccess')
+const ShopCart = () => import('@/pages/ShopCart')
+const Trade = () => import('@/pages/Trade')
+const Pay = () => import('@/pages/Pay')
+const PaySuccess = () => import('@/pages/PaySuccess')
+const Center = () => import('@/pages/Center')
 //二级路由组件
-import MyOrder from '@/pages/Center/MyOrder'
-import GroupOrder from '@/pages/Center/GroupOrder'
+const MyOrder = () => import('@/pages/Center/MyOrder')
+const GroupOrder = () => import('@/pages/Center/GroupOrder')
 
 export default [
   //home路由
@@ -33,6 +33,13 @@ export default [
     meta:{
       //是否展示下框
       show: true,
+    },
+    beforeEnter: (to, from, next) => {
+      if(from.path.search("/paysuccess") != -1){
+        next();
+      }else{
+        next(false);
+      }
     },
     //二级路由
     children: [
@@ -60,6 +67,13 @@ export default [
       //是否展示下框
       show: true,
     },
+    beforeEnter: (to, from, next) => {
+      if(from.path.search("/pay") != -1){
+        next();
+      }else{
+        next(false);
+      }
+    }
   },
   //购物车
   {
@@ -78,6 +92,13 @@ export default [
     meta:{
       show: true,
     },
+    beforeEnter: (to, from, next) => {
+      if(from.path.search("/trade") != -1){
+        next();
+      }else{
+        next(false);
+      }
+    }
   },
   //交易
   {
@@ -87,6 +108,13 @@ export default [
     meta:{
       show: true,
     },
+    beforeEnter: (to, from, next) => {
+      if(from.path.search("/shopcart") != -1){
+        next();
+      }else{
+        next(false);
+      }
+    }
   },
   //购物详情页
   {

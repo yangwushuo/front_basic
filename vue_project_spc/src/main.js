@@ -33,6 +33,18 @@ import 'swiper/css/swiper.css';
 //引入api
 import * as API from '@/api/index'
 
+//引入vue-lazyload懒加载
+import VueLazyload from 'vue-lazyload';
+//引入加载效果图片
+import loadImg from '@/assets/loading.gif';
+//注册插件
+Vue.use(VueLazyload, {
+  loading: loadImg,
+});
+
+//引入校验的插件
+import '@/plugins/validate';
+
 new Vue({
   render: h => h(App),  
   //配置全局事件总线
