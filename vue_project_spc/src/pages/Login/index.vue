@@ -102,6 +102,7 @@ export default {
         //登录成功进行路由跳转
         //获取路劲中query是否有指定跳转的路由
         let toPath = this.$route.query.redirect || '/home';
+        console.log(toPath);
         this.$router.push(toPath);
       } catch (error) {
         console.log(error.message);

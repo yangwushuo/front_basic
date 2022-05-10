@@ -109,7 +109,7 @@ export default [
       show: true,
     },
     beforeEnter: (to, from, next) => {
-      if(from.path.search("/shopcart") != -1){
+      if(from.path.search("/shopcart") != -1 || from.path.search('/login') != -1){
         next();
       }else{
         next(false);
