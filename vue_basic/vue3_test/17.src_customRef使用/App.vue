@@ -18,7 +18,7 @@ export default {
             track();
             return value;
           },
-          set(newValue){
+          set(newValue){  
             value = newValue;
             clearTimeout(timer)
             //延迟渲染界面s

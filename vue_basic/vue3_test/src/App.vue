@@ -14,7 +14,8 @@
         <h3>稍等，加载中...</h3>
       </template>
     </Suspense>
-    
+    <a-button type="primary">Primary</a-button>
+    <a-upload action="/" />
   </div>
 </template>
 
