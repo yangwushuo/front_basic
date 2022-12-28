@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>语义化标签</title>
+  </head>
+  <body>
+    <script>
+      /*
+      笔记:  网络笔记:https://mengera88.github.io/2017/05/15/promise%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/
+      promise分为三种状态
+        1.pending: 初始状态，位履行或拒绝
+        2.fulfilled: 意味着操作成功完成
+        3.rejected: 意味着操作失败
+
+        pending 状态的 Promise对象可能以 fulfilled状态返回了一个值，也可能被某种理由（异常信息）拒绝（reject）了。
+        当其中任一种情况出现时，Promise 对象的 then 方法绑定的处理方法（handlers）就会被调用，then方法分别指定了
+        resolve方法和reject方法的回调函数
+
+        示例: 
+            promise.then(function(value) {
+              // 如果调用了resolve方法，执行此函数
+            }, function(value) {
+              // 如果调用了reject方法，执行此函数
+            });
+      */
+
+      console.log(1);
+      let p = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log(2);
+        }, 3000);
+
+        if (true) {
+          resolve("这是正确的");
+        } else {
+          reject("这是错误的");
+        }
+      });
+
+      console.log(3);
+      p.then((res) => {
+        //此异步供后一个then调用
+        return new Promise((rs, rj) => {
+          rs("这是正确的");
+        });
+      })
+        .then((res) => {
+          console.log("这是链式操作结果:", res);
+        })
+        .catch((err) => {
+          //此catch处理前面多个then的异常抛出结果
+        });
+
+      let ps = [1, 2, 3].map((num) => {
+        return new Promise((rs, rj) => {
+          if (num <= 0) {
+            rs(num);
+          } else {
+            rj(num);
+          }
+        });
+      });
+
+      //Promise.all使用 如果有一个为reject状态则reject抛出异常， 如果全为fulfilled状态则resolve状态
+      Promise.all(ps)
+        .then((res) => {
+          console.log("这是promise.all的正确结果:", res);
+        })
+        .catch((err) => {
+          console.log("这是promise.all的错误结果:", err);
+        });
+
+      //Promise.race使用 如果有一个率先改变状态，也就是率先出结果，则那个率先改变的Promise实例的返回值，就传递给p的返回值。
+      Promise.race(ps)
+        .then((res) => {
+          console.log("这是promise.race的正确结果:", res);
+        })
+        .catch((err) => {
+          console.log("这是promise.race的错误结果:", err);
+        });
+
+      //题目:
+      console.log(51);
+      new Promise(function (resolve, reject) {
+        reject(true);
+        window.setTimeout(function () {
+          resolve(false);
+        }, 0);
+      }).then(
+        function () {
+          console.log(52);
+        },
+        function () {
+          console.log(53);
+        }
+      );
+      console.log(54);
+    </script>
+  </body>
+</html>

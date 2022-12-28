@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>特征</title>
+  </head>
+  <body>
+    <!-- 通过给script添加type=module的属性，就可以以ES Module的标准执行其中的js代码 -->
+    <script type="module">
+      console.log("this is es module");
+    </script>
+
+    <!-- 1. ESM 自动采用严格模式 忽略‘use strict’ -->
+    <script type="module">
+      console.log(this); //  es module 私有 this不会指向window只会报undefined
+    </script>
+
+    <!-- 2. 每个 ES Module 都是运行在单独的私有作用域中 -->
+    <script type="module">
+      var foo = 100;
+      console.log(foo);   
+    </script>
+    <script type="module">console.log(foo)</script>
+
+    <!-- 3. ESM 是通过CORS的方式请求外部的js 模块的 -->
+    <!-- <script type="module" src="https://xxxxx"></script> -->
+
+    <!-- 4. ESM 的script 标签会延迟执行脚本 元素渲染完成脚本还没有执行完成   -->
+    <script type="module" src="01-demo.js"></script>
+    <p>这是内容</p>
+  </body>
+</html>
