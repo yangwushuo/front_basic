@@ -1,0 +1,9 @@
+@import url(reset.css);
+
+body{
+  min-height: 100vh;
+  background-color: white;
+  /* css-loader 在加载此css文件的时候遇到url()函数载入图片，则会将此资源图片加入到打包过程 webpack会根据这个图片找到相应的loader进行打包   */
+  background-image: url(testPic.png);
+  background-size: cover;
+}
