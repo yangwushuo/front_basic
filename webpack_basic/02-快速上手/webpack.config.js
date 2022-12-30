@@ -8,6 +8,10 @@ module.exports = {
     path: path.join(__dirname, 'dist'), //输出文件路径必须是绝对路径 使用path获取绝对路径
     publicPath: 'dist/' //指定说明公共入口路径 
   },
+  //配置 webpack-dev-server静态资源的文件目录
+  devServer: {
+    contentBase: ['./public']
+  },
   //module配置指定文件的打包规则(加载器) 通过使用不同的loader可以实现加载任何不同类型的文件
   module: {
     //yarn add css-loader --dev 安装专门用于打包css文件的加载器 

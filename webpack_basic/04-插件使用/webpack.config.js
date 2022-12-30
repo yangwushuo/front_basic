@@ -57,7 +57,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'about.html'
     }),
-    //将public文件夹拷贝进去
+    //将public文件夹拷贝进去  一般开发阶段不会使用，项目最终打包的时候使用，避免重复读写
     new CopyWebpackPlugin({
       patterns: [{
           from: 'public'

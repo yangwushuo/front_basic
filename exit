@@ -1,0 +1,68 @@
+[33mcommit 5943e7fb2e5a34a5c053d392af4a928e57871ee0[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: jasonyang <1197414647@qq.com>
+Date:   Thu Dec 29 23:18:34 2022 +0800
+
+    12-29
+
+[1mdiff --git a/webpack_basic/01-features/01-features.html b/webpack_basic/01-features/01-features.html[m
+[1mindex 29bdabd..3c03684 100644[m
+[1m--- a/webpack_basic/01-features/01-features.html[m
+[1m+++ b/webpack_basic/01-features/01-features.html[m
+[36m@@ -2,7 +2,7 @@[m
+ <html lang="en">[m
+   <head>[m
+     <meta charset="UTF-8" />[m
+[31m-    <title>特征</title>[m
+[32m+[m[32m    <title>特征</title>[m[41m [m
+   </head>[m
+   <body>[m
+     <!-- 通过给script添加type=module的属性，就可以以ES Module的标准执行其中的js代码 -->[m
+[1mdiff --git "a/webpack_basic/02-\345\277\253\351\200\237\344\270\212\346\211\213/dist/39a1afe680bfd72b31acf35a504ac9fd.png" "b/webpack_basic/02-\345\277\253\351\200\237\344\270\212\346\211\213/dist/39a1afe680bfd72b31acf35a504ac9fd.png"[m
+[1mnew file mode 100644[m
+[1mindex 0000000..8edf044[m
+Binary files /dev/null and "b/webpack_basic/02-\345\277\253\351\200\237\344\270\212\346\211\213/dist/39a1afe680bfd72b31acf35a504ac9fd.png" differ
+[1mdiff --git "a/webpack_basic/02-\345\277\253\351\200\237\344\270\212\346\211\213/dist/4afe9e2fbda3ce1a7442.png" "b/webpack_basic/02-\345\277\253\351\200\237\344\270\212\346\211\213/dist/4afe9e2fbda3ce1a7442.png"[m
+[1mnew file mode 100644[m
+[1mindex 0000000..c28e65e[m
+[1m--- /dev/null[m
+[1m+++ "b/webpack_basic/02-\345\277\253\351\200\237\344\270\212\346\211\213/dist/4afe9e2fbda3ce1a7442.png"[m
+[36m@@ -0,0 +1 @@[m
+[32m+[m[32mexport default __webpack_public_path__ + "39a1afe680bfd72b31acf35a504ac9fd.png";[m
+\ No newline at end of file[m
+[1mdiff --git "a/webpack_basic/02-\345\277\253\351\200\237\344\270\212\346\211\213/dist/main.js" "b/webpack_basic/02-\345\277\253\351\200\237\344\270\212\346\211\213/dist/main.js"[m
+[1mindex 61dee3f..f35cc1a 100644[m
+[1m--- "a/webpack_basic/02-\345\277\253\351\200\237\344\270\212\346\211\213/dist/main.js"[m
+[1m+++ "b/webpack_basic/02-\345\277\253\351\200\237\344\270\212\346\211\213/dist/main.js"[m
+[36m@@ -1 +1,760 @@[m
+[31m-(()=>{"use strict";const e=(()=>{const e=document.createElement("h2");return e.textContent="Hello Wrold",e.addEventListener("click",(()=>{alert("Hello webpack")})),e})();document.body.append(e)})();[m
+\ No newline at end of file[m
+[32m+[m[32m/******/ (() => { // webpackBootstrap[m
+[32m+[m[32m/******/ 	"use strict";[m
+[32m+[m[32m/******/ 	var __webpack_modules__ = ([[m
+[32m+[m[32m/* 0 */,[m
+[32m+[m[32m/* 1 */[m
+[32m+[m[32m/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {[m
+[32m+[m
+[32m+[m[32m__webpack_require__.r(__webpack_exports__);[m
+[32m+[m[32m/* harmony export */ __webpack_require__.d(__webpack_exports__, {[m
+[32m+[m[32m/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)[m
+[32m+[m[32m/* harmony export */ });[m
+[32m+[m[32m/* harmony import */ var _heading_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);[m
+[32m+[m[32m //这里引用css文件对元素进行类样式的修改 webpack希望遵循代码使用的时候在加载指定的文件[m[41m [m
+[32m+[m[32m//这里加载heading.css文件会将 heading文件一同打包[m
+[32m+[m[32m/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {[m
+[32m+[m[32m  var element = document.createElement('h2');[m
+[32m+[m[32m  element.classList.add('heading');[m
+[32m+[m[32m  element.textContent = 'Hello Wrold';[m
+[32m+[m[32m  element.addEventListener('click', function () {[m
+[32m+[m[32m    alert("Hello webpack");[m
+[32m+[m[32m  });[m
+[32m+[m[32m  return element;[m
+[32m+[m[32m});[m
+[32m+[m
+[32m+[m[32m/***/ }),[m
+[32m+[m[32m/* 2 */[m
+[32m+[m[32m/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {[m
+[32m+[m
+[32m+[m[32m__webpack_require__.r(__webpack_exports__);[m
+[32m+[m[32m/* harmony export */ 
