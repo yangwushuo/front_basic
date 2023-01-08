@@ -60,7 +60,7 @@ app.use("/hello",(req, res,next) => {
 // 第一个request 第二个 response
 app.get("/", (req, res)=>{
 
-  //读取
+  //读取  
 
   //send方法发送什么 浏览器就会渲染什么
   // res.sendStatus(200) sendStatus设置状态码之后立刻返回数据 
