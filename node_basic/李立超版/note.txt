@@ -1,0 +1,25 @@
+讲师：李立超
+课程：Node.js
+计划：周一-周五 每天19点 一小时
+本周的计划：
+    周一：node简介和安装
+    周二-周四：异步和Promise
+    周五：模块化..
+
+Node.js
+    - 运行在服务器端的js
+    - 用来编写服务器
+    - 特点：
+        - 单线程、异步、非阻塞
+        - 统一API
+
+    nvm
+        - 命令
+            nvm list - 显示已安装的node版本
+            nvm install 版本 - 安装指定版本的node
+            配置nvm的镜像服务器
+                nvm node_mirror https://npmmirror.com/mirrors/node/
+            nvm use 版本 - 指定要使用的node版本
+
+    node.js和JavaScript有什么区别
+        ECMAScript（node有） DOM（node没有） BOM（node没有）

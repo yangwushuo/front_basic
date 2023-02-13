@@ -1,0 +1,39 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app" style="color: red; background-color: blue">
+      <div>我是一个大帅哥</div>
+      <span> {{name}} + {{age}}</span>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data() {
+          return {
+            name: "yangwushuo",
+            age: 22,
+            sex: "男",
+            family: {
+              father: "guozhong",
+            },
+            hobby: ["eat", "drink"],
+            user: {
+              name: "jason1",
+              age: 24,
+            },
+          };
+        },
+      });
+      setTimeout(()=>{
+        app.name = 'jason'
+      },3000)
+
+    </script>
+  </body>
+</html>
